@@ -4,3 +4,6 @@
 
 /CorporatePortal/.vs/CorporatePortal
 /CorporatePortal/WPF/obj/Debug
+/.vs
+/CorporatePortal/API/bin/Debug/net8.0
+/CorporatePortal/API/obj
