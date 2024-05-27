@@ -1,0 +1,27 @@
+﻿<Window x:Class="CorporatePortal.WPF.Views.DashboardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CorporatePortal.WPF.Views"
+        mc:Ignorable="d"
+        Title="DashboardView" Height="450" Width="800">
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Список Проектов" FontSize="20" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="10"/>
+
+            <ListBox x:Name="myListBox" Grid.Row="1" Grid.ColumnSpan="3" Margin="10" DisplayMemberPath="НазваниеПроекта"/>
+
+        </Grid>
+</Window>

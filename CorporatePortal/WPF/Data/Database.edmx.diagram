@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6941f7bb7bb14d3eb8b64a6702f69177" Name="Diagram1">
+        <EntityTypeShape EntityType="testsetsModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.Документы" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.Мероприятия" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.Новости" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.ОтветственныеЗаДокумент" Width="1.5" PointX="10.5" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.ОтветственныеЗаМероприятие" Width="1.5" PointX="10.5" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.Подразделения" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.Пользователи" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.Проекты" Width="1.5" PointX="5.25" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.Роли" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.СобытияОтсутствия" Width="1.5" PointX="5.25" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.СогласующиеДокумент" Width="1.5" PointX="10.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.СтатусыДокументов" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.СтатусыМероприятий" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.ТипыДокументов" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.ТипыМероприятий" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.УчастникиМероприятия" Width="1.5" PointX="13.5" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.ЭтапыДокументов" Width="1.5" PointX="7.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="testsetsModel.ЭтапыПроектов" Width="1.5" PointX="7.5" PointY="24.5" IsExpanded="true" />
+        <AssociationConnector Association="testsetsModel.FK__Документы__Созда__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Документы__Стату__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Документы__ТипДо__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Ответстве__Докум__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Согласующ__Докум__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__ЭтапыДоку__Докум__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Мероприят__Иници__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Мероприят__Стату__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Мероприят__ТипМе__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Ответстве__Мероп__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Участники__Мероп__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Новости__Создано__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Ответстве__Польз__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Ответстве__Польз__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Подраздел__Помощ__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Подраздел__Руков__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Пользоват__Подра__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Пользоват__Замен__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Пользоват__РольI__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Проекты__Руковод__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__СобытияОт__Польз__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Согласующ__Польз__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__Участники__Польз__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__ЭтапыПрое__Проек__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.FK__ЭтапыДоку__Текущ__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="testsetsModel.ПользователиПроекты" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
