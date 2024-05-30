@@ -1,4 +1,5 @@
 ﻿using CorporatePortal.WPF.Models;
+using CorporatePortal.WPF.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF.Data;
+using CorporatePortal.WPF.Views.Pages;
+using WPF.Views.Pages;
 
 namespace CorporatePortal.WPF.Views
 {
@@ -23,51 +27,23 @@ namespace CorporatePortal.WPF.Views
     /// </summary>
     public partial class DashboardView : Window
     {
-        private readonly HttpClient _httpClient;
-        /// <summary>
-        /// 
-        ///
-        /// </summary>
-        /// <param name="login"></param>
-        public DashboardView()
+        private User _currentUser;
+
+        public DashboardView(User currentUser)
         {
             InitializeComponent();
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("https://localhost:44397/api/")
-            };
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            LoadProjects();
-
-        }
-        private async void LoadProjects()
-        {
-            List<Project> проекты = await GetПроектыAsync();
-            if (проекты != null)
-            {
-                myListBox.ItemsSource = проекты;
-            }
-            else
-            {
-                MessageBox.Show("Ошибка при загрузке проектов.");
-            }
-        }
-        public async Task<List<Project>> GetПроектыAsync()
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync("Проекты");
-            if (response.IsSuccessStatusCode)
-            {
-                string data = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<Project>>(data);
-            }
-            return null;
+            _currentUser = currentUser;
+            MessageBox.Show(_currentUser.ToString());
         }
 
-        public async Task<bool> DeleteПроектAsync(int id)
+        private void NavigateToUsers(object sender, RoutedEventArgs e)
         {
-            HttpResponseMessage response = await _httpClient.DeleteAsync($"Проекты/{id}");
-            return response.IsSuccessStatusCode;
+            MainFrame.Navigate(new ControlEmployees());
+        }
+
+        private void NavigateToIventsCalendar(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new IventCalendar());
         }
     }
 }

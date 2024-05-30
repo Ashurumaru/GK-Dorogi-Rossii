@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CorporatePortal.WPF.Views"
         mc:Ignorable="d"
-        Title="LoginView" Height="450" Width="800">
-    <Grid>
-        <Button Click="Button_Click" Content="go" />
-    </Grid>
+        Title="Выбор пользователя" Height="450" Width="800">
+    <StackPanel>
+        <TextBlock Text="Выберете пользователя для входа в приложение." />
+        <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Имя}" Width="*"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия}" Width="*"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Отчество}" Width="*"/>
+                <DataGridTextColumn Header="Должность" Binding="{Binding Должность}" Width="*"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Войти" CommandParameter="{Binding}" Click="btnLogin_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+     </StackPanel>
 </Window>
