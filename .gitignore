@@ -8,3 +8,6 @@
 /CorporatePortal/API/bin/Debug/net8.0
 /CorporatePortal/API/obj
 /CorporatePortal/packages
+/CorporatePortal/.vs
+/CorporatePortal/WPF/.vs
+/CorporatePortal/WPF/obj/Release
