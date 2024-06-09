@@ -4,6 +4,19 @@
         <name>WPF</name>
     </assembly>
     <members>
+        <member name="T:WPF.Utils.PasswordGenerate">
+            <summary>
+            Логика взаимодействия для PasswordGenerate.xaml
+            </summary>
+            <summary>
+            PasswordGenerate
+            </summary>
+        </member>
+        <member name="M:WPF.Utils.PasswordGenerate.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:WPF.Views.Pages.EmployeePortal">
             <summary>
             Логика взаимодействия для EmployeePortal.xaml

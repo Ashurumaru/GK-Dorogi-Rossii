@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Data;
 using API.Models;
+using Microsoft.AspNetCore.Identity.Data;
+using System.Text;
+using System.Security.Cryptography;
+using Microsoft.CodeAnalysis.Scripting;
 
 namespace API.Controllers
 {
@@ -15,11 +19,43 @@ namespace API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly CorporatePortalContext _context;
+        private readonly IConfiguration _configuration;
 
         public UsersController(CorporatePortalContext context)
         {
             _context = context;
         }
+        // POST: api/Users/Authorize
+        [HttpPost("Authorize")]
+        public async Task<ActionResult<User>> AuthorizeUser(LoginDto loginRequest)
+        {
+            // Получаем учетную запись пользователя по имени пользователя
+            var userAccount = await _context.UserAccount
+                .FirstOrDefaultAsync(u => u.username == loginRequest.Username);
+
+            if (userAccount == null)
+            {
+                return Unauthorized("Invalid username or password.");
+            }
+
+            // Проверяем пароль
+            if (!BCrypt.Net.BCrypt.Verify(loginRequest.Password, userAccount.passwordHash))
+            {
+                return Unauthorized("Invalid username or password.");
+            }
+
+            // Получаем пользователя по id
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.idUser == userAccount.idUser);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(user);
+        }
+
 
         // GET: api/Users
         [HttpGet]
@@ -33,7 +69,7 @@ namespace API.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUserFromId(int id)
         {
             var user = await _context.Users.FindAsync(id);
 

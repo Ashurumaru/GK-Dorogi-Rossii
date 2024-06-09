@@ -5,23 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CorporatePortal.WPF.Views"
         mc:Ignorable="d"
-        Title="Выбор пользователя" Height="450" Width="800">
-    <StackPanel>
-        <TextBlock Text="Выберете пользователя для входа в приложение." />
-        <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Имя" Binding="{Binding Имя}" Width="*"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия}" Width="*"/>
-                <DataGridTextColumn Header="Отчество" Binding="{Binding Отчество}" Width="*"/>
-                <DataGridTextColumn Header="Должность" Binding="{Binding Должность}" Width="*"/>
-                <DataGridTemplateColumn Width="auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Войти" CommandParameter="{Binding}" Click="btnLogin_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-     </StackPanel>
+                Style="{DynamicResource LoginWindowStyle}">
+    <Grid>
+        <Grid x:Name="BackgroundGrid">
+            <!--<Grid.Background>
+                <ImageBrush ImageSource="\Image\zolushka.j" Stretch="UniformToFill"/>
+            </Grid.Background>-->
+        </Grid>
+        <Grid Background="{DynamicResource  GradientBackgroundBrush}" Opacity="0.5"/>
+        <Grid>
+            <Grid Margin="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border Style="{DynamicResource  LoginBorderStyle}"/>
+                <StackPanel Width="200" Height="280">
+                    <TextBlock Text="Sign in your account" Style="{DynamicResource  StandartText}" Margin="0 0 0 30" HorizontalAlignment="Center" FontSize="17"/>
+                    <TextBlock Text="Login" Style="{DynamicResource  StandartText}" FontSize="12" Opacity="0.7"/>
+                    <TextBox Width="200" x:Name="txtLogin" Margin="0 0 0 10" Height="30" Style="{DynamicResource  TextBoxStyle}"/>
+                    <TextBlock Text="Password" Style="{DynamicResource  StandartText}" FontSize="12" Opacity="0.7"/>
+                    <PasswordBox Width="200" Name="password" Margin="0 0 0 56" Height="30" PasswordChanged="PasswordBox_PasswordChanged" Style="{DynamicResource  PasswordBoxStyle}"/>
+                    <Button Content="Sign In" Click="LoginButton_Click" Width="200" Height="30" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource  ButtonStyle}"/>
+                    <TextBlock x:Name="ErrorMessage" Style="{DynamicResource  StandartText}" FontSize="10" Background="#cb2821" Opacity="0.7"  Margin="0 8 0 0"/>
+                </StackPanel>
+            </Grid>
+            <Grid VerticalAlignment="Top">
+                <DockPanel Name="titleBar" VerticalAlignment="Top" Height="32" LastChildFill="False" MouseDown="DockPanel_MouseDown" Background="Transparent">
+                    <Button Style="{DynamicResource  CloseButtonStyle}" x:Name="btn_close" Content="&#xE8BB;" Click="btn_close_Click" />
+                    <Button Style="{DynamicResource  MaxMinButtonStyle}" x:Name="btn_maximize" Content="&#xE922;" Click="btn_maximize_Click"/>
+                    <Button Style="{DynamicResource  MaxMinButtonStyle}" x:Name="btn_minimize" Content="&#xE921;" Click="btn_minimize_Click"/>
+                </DockPanel>
+            </Grid>
+        </Grid>
+        <TextBlock Text="Github: Ashurumaru" Style="{DynamicResource  StandartText}" Margin="0 0 0 4" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="12" Opacity="0.6">
+            <TextBlock.InputBindings>
+                <MouseBinding Gesture="LeftClick" Command="{Binding OpenGitHubCommand}" />
+            </TextBlock.InputBindings>
+        </TextBlock>
+    </Grid>
 </Window>

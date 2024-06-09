@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using WPF.Data;
 using CorporatePortal.WPF.Models;
+using CorporatePortal.WPF.Utils;
+using System.Windows.Input;
 
 namespace CorporatePortal.WPF.Views
 {
@@ -18,54 +20,143 @@ namespace CorporatePortal.WPF.Views
     {
         private List<User> Users;
         private User currentUser;
+        private string _password;
+        private readonly ApiClient _apiClient;
+
         public LoginView()
         {
             InitializeComponent();
+            _apiClient = new ApiClient("https://localhost:7201/");
             LoadUsers();
-            
+
         }
 
 
         private void LoadUsers()
         {
-            //using (var context = new CorporatePortalEntities())
-            //{
-            //    Users = context.Пользователи.Select(u => new User
-            //    {
-            //        ПользовательID = u.ПользовательID,
-            //        Логин = u.Логин,
-            //        Пароль = u.Пароль,
-            //        Имя = u.Имя,
-            //        Фамилия = u.Фамилия,
-            //        Отчество = u.Отчество,
-            //        ЭлПочта = u.ЭлПочта,
-            //        РольID = u.РольID,
-            //        ПодразделениеID = u.ПодразделениеID,
-            //        Должность = u.Должность,
-            //        РабочийТелефон = u.РабочийТелефон,
-            //        ДомашнийТелефон = u.ДомашнийТелефон,
-            //        ДатаРождения = u.ДатаРождения,
-            //        ЗаменяющийID = u.ЗаменяющийID,
-            //        ПутьКФото = u.ПутьКФото
-            //    }).ToList();
-            //    UsersDataGrid.ItemsSource = Users;
-            //}
+           
         }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+ 
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            if (button != null)
+            string login = txtLogin.Text;
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(_password))
             {
-                var user = button.CommandParameter as User;
+                ErrorMessage.Text = "Введите логин и пароль.";
+                return; 
+            }
+
+            try
+            {
+                User user = await _apiClient.AuthorizeUserAsync(login, _password);
                 if (user != null)
                 {
-                    currentUser = user;
-                    MessageBox.Show($"Вход для пользователя: {user.Имя} {user.Фамилия}");
-                    DashboardView window = new DashboardView(user);
-                    window.Show();
+                    DashboardView dashbord = new DashboardView(user);
+                    dashbord.Show();
                     this.Close();
                 }
+                else
+                {
+                    ErrorMessage.Text = "Неверный логин или пароль.";
+                    ErrorMessage.Opacity = 1;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage.Text = "Ошибка: " + ex.Message;
+                MessageBox.Show(ex.Message);
+                ErrorMessage.Opacity = 1;
+            }
+        }
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = (PasswordBox)sender;
+            _password = passwordBox.Password;
+        }
+        private void btn_close_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void btn_maximize_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchWindowState();
+        }
+
+        private void btn_minimize_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).WindowState = WindowState.Minimized;
+        }
+
+        private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount >= 2)
+            {
+                SwitchWindowState();
+                return;
+            }
+
+            if (Window.GetWindow(this).WindowState == WindowState.Maximized)
+            {
+                return;
+            }
+            else
+            {
+                if (e.LeftButton == MouseButtonState.Pressed) Window.GetWindow(this).DragMove();
+            }
+        }
+
+        private void MaximizeWindow()
+        {
+            Window.GetWindow(this).WindowState = WindowState.Maximized;
+        }
+
+        private void RestoreWindow()
+        {
+            Window.GetWindow(this).WindowState = WindowState.Normal;
+        }
+
+        private void SwitchWindowState()
+        {
+            if (Window.GetWindow(this).WindowState == WindowState.Normal) MaximizeWindow();
+            else RestoreWindow();
+        }
+
+        private void MinimizeAndDragMove(MouseButtonEventArgs e)
+        {
+            if (Window.GetWindow(this).WindowState == WindowState.Maximized)
+            {
+                double percentHorizontal = e.GetPosition(this).X / ActualWidth;
+                double targetHorizontal = Window.GetWindow(this).RestoreBounds.Width * percentHorizontal;
+
+                double percentVertical = e.GetPosition(this).Y / ActualHeight;
+                double targetVertical = Window.GetWindow(this).RestoreBounds.Height * percentVertical;
+
+                Window.GetWindow(this).WindowStyle = WindowStyle.None;
+                RestoreWindow();
+
+                var mousePosition = e.GetPosition(this);
+
+                Window.GetWindow(this).Left = mousePosition.X - targetHorizontal;
+                Window.GetWindow(this).Top = mousePosition.Y - targetVertical;
+            }
+
+            if (e.LeftButton == MouseButtonState.Pressed) Window.GetWindow(this).DragMove();
+            Window.GetWindow(this).WindowStyle = WindowStyle.SingleBorderWindow;
+        }
+
+        public void WindowStateChanged(WindowState state)
+        {
+            if (Window.GetWindow(this).WindowState == WindowState.Maximized)
+            {
+                btn_maximize.Content = "\uE923";
+                titleBar.Height = 24;
+            }
+            else if (Window.GetWindow(this).WindowState == WindowState.Normal)
+            {
+                btn_maximize.Content = "\uE922";
+                titleBar.Height = 32;
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using CorporatePortal.WPF.Models;
+using API.Models;
 
 namespace CorporatePortal.WPF.Utils
 {
@@ -24,6 +25,28 @@ namespace CorporatePortal.WPF.Utils
 
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<List<User>>(content);
+        }
+
+        public async Task<User> AuthorizeUserAsync(string username, string password)
+        {
+            var loginRequest = new LoginDto
+            {
+                Username = username,
+                Password = password
+            };
+
+            var json = JsonConvert.SerializeObject(loginRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("api/users/authorize", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<User>(responseContent);
         }
 
         public async Task<User> GetUserAsync(int id)
