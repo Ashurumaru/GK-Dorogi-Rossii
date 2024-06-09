@@ -12,13 +12,18 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class УчастникиМероприятия
+    public partial class UserRoles
     {
-        public int УчастникID { get; set; }
-        public int МероприятиеID { get; set; }
-        public int ПользовательID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UserRoles()
+        {
+            this.Users = new HashSet<Users>();
+        }
     
-        public virtual Мероприятия Мероприятия { get; set; }
-        public virtual Пользователи Пользователи { get; set; }
+        public int idRole { get; set; }
+        public string nameRole { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

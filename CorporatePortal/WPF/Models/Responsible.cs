@@ -13,6 +13,5 @@ namespace WPF.Models
         public int МероприятиеID { get; set; }
         public int ПользовательID { get; set; }
 
-        public virtual Пользователи Пользователь { get; set; }
     }
 }

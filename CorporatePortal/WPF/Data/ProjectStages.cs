@@ -12,13 +12,17 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ОтветственныеЗаМероприятие
+    public partial class ProjectStages
     {
-        public int ОтветственныйID { get; set; }
-        public int МероприятиеID { get; set; }
-        public int ПользовательID { get; set; }
+        public int idStageProject { get; set; }
+        public Nullable<int> idProject { get; set; }
+        public string nameState { get; set; }
+        public Nullable<System.DateTime> startDate { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
+        public Nullable<int> idStatusStage { get; set; }
+        public string descriptionStage { get; set; }
     
-        public virtual Мероприятия Мероприятия { get; set; }
-        public virtual Пользователи Пользователи { get; set; }
+        public virtual Projects Projects { get; set; }
+        public virtual ProjectStateStatuses ProjectStateStatuses { get; set; }
     }
 }

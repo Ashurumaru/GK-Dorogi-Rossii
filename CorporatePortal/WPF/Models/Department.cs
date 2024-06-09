@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CorporatePortal.WPF.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Department
     {
         public int ПодразделениеID { get; set; }

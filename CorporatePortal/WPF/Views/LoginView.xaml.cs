@@ -28,29 +28,30 @@ namespace CorporatePortal.WPF.Views
 
         private void LoadUsers()
         {
-            using (var context = new CorporatePortalEntities())
-            {
-                Users = context.Пользователи.Select(u => new User
-                {
-                    ПользовательID = u.ПользовательID,
-                    Логин = u.Логин,
-                    Пароль = u.Пароль,
-                    Имя = u.Имя,
-                    Фамилия = u.Фамилия,
-                    Отчество = u.Отчество,
-                    ЭлПочта = u.ЭлПочта,
-                    РольID = u.РольID,
-                    ПодразделениеID = u.ПодразделениеID,
-                    Должность = u.Должность,
-                    РабочийТелефон = u.РабочийТелефон,
-                    ДомашнийТелефон = u.ДомашнийТелефон,
-                    ДатаРождения = u.ДатаРождения,
-                    ЗаменяющийID = u.ЗаменяющийID,
-                    ПутьКФото = u.ПутьКФото
-                }).ToList();
-                UsersDataGrid.ItemsSource = Users;
-            }
+            //using (var context = new CorporatePortalEntities())
+            //{
+            //    Users = context.Пользователи.Select(u => new User
+            //    {
+            //        ПользовательID = u.ПользовательID,
+            //        Логин = u.Логин,
+            //        Пароль = u.Пароль,
+            //        Имя = u.Имя,
+            //        Фамилия = u.Фамилия,
+            //        Отчество = u.Отчество,
+            //        ЭлПочта = u.ЭлПочта,
+            //        РольID = u.РольID,
+            //        ПодразделениеID = u.ПодразделениеID,
+            //        Должность = u.Должность,
+            //        РабочийТелефон = u.РабочийТелефон,
+            //        ДомашнийТелефон = u.ДомашнийТелефон,
+            //        ДатаРождения = u.ДатаРождения,
+            //        ЗаменяющийID = u.ЗаменяющийID,
+            //        ПутьКФото = u.ПутьКФото
+            //    }).ToList();
+            //    UsersDataGrid.ItemsSource = Users;
+            //}
         }
+
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;

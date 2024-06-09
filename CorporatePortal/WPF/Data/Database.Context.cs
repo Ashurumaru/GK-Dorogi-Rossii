@@ -13,10 +13,10 @@ namespace WPF.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CorporatePortalEntities : DbContext
+    public partial class corporate_portalEntities : DbContext
     {
-        public CorporatePortalEntities()
-            : base("name=CorporatePortalEntities")
+        public corporate_portalEntities()
+            : base("name=corporate_portalEntities")
         {
         }
     
@@ -25,24 +25,19 @@ namespace WPF.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Departments> Departments { get; set; }
+        public virtual DbSet<Events> Events { get; set; }
+        public virtual DbSet<EventStatuses> EventStatuses { get; set; }
+        public virtual DbSet<EventTypes> EventTypes { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Projects> Projects { get; set; }
+        public virtual DbSet<ProjectStages> ProjectStages { get; set; }
+        public virtual DbSet<ProjectStateStatuses> ProjectStateStatuses { get; set; }
+        public virtual DbSet<ProjectStatuses> ProjectStatuses { get; set; }
+        public virtual DbSet<ProjectTypes> ProjectTypes { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Документы> Документы { get; set; }
-        public virtual DbSet<Мероприятия> Мероприятия { get; set; }
-        public virtual DbSet<Новости> Новости { get; set; }
-        public virtual DbSet<ОтветственныеЗаДокумент> ОтветственныеЗаДокумент { get; set; }
-        public virtual DbSet<ОтветственныеЗаМероприятие> ОтветственныеЗаМероприятие { get; set; }
-        public virtual DbSet<Подразделения> Подразделения { get; set; }
-        public virtual DbSet<Пользователи> Пользователи { get; set; }
-        public virtual DbSet<Проекты> Проекты { get; set; }
-        public virtual DbSet<Роли> Роли { get; set; }
-        public virtual DbSet<СобытияОтсутствия> СобытияОтсутствия { get; set; }
-        public virtual DbSet<СогласующиеДокумент> СогласующиеДокумент { get; set; }
-        public virtual DbSet<СтатусыДокументов> СтатусыДокументов { get; set; }
-        public virtual DbSet<СтатусыМероприятий> СтатусыМероприятий { get; set; }
-        public virtual DbSet<ТипыДокументов> ТипыДокументов { get; set; }
-        public virtual DbSet<ТипыМероприятий> ТипыМероприятий { get; set; }
-        public virtual DbSet<УчастникиМероприятия> УчастникиМероприятия { get; set; }
-        public virtual DbSet<ЭтапыДокументов> ЭтапыДокументов { get; set; }
-        public virtual DbSet<ЭтапыПроектов> ЭтапыПроектов { get; set; }
+        public virtual DbSet<UserPositions> UserPositions { get; set; }
+        public virtual DbSet<UserRoles> UserRoles { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

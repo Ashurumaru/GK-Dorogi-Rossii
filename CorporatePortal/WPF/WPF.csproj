@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\WPF.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,81 +68,66 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Database.Context.cs">
+    <Compile Include="Data\database.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.Context.tt</DependentUpon>
+      <DependentUpon>database.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Database.cs">
+    <Compile Include="Data\database.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Database.Designer.cs">
+    <Compile Include="Data\database.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.edmx</DependentUpon>
+      <DependentUpon>database.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Departments.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Events.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EventStatuses.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EventTypes.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\News.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Projects.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectStages.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectStateStatuses.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectStatuses.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProjectTypes.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sysdiagrams.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserPositions.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserRoles.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Users.cs">
+      <DependentUpon>database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\Responsible.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Data\sysdiagrams.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Документы.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Мероприятия.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Новости.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ОтветственныеЗаДокумент.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ОтветственныеЗаМероприятие.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Подразделения.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Пользователи.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Проекты.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Роли.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\СобытияОтсутствия.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\СогласующиеДокумент.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\СтатусыДокументов.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\СтатусыМероприятий.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ТипыДокументов.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ТипыМероприятий.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\УчастникиМероприятия.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ЭтапыДокументов.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ЭтапыПроектов.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Project.cs" />
@@ -155,6 +141,9 @@
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\EmployeePortal.xaml.cs">
+      <DependentUpon>EmployeePortal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\IventCalendar.xaml.cs">
       <DependentUpon>IventCalendar.xaml</DependentUpon>
@@ -171,6 +160,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resourses\styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\ControlEmployees.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -182,6 +175,10 @@
     <Page Include="Views\LoginView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\EmployeePortal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\IventCalendar.xaml">
       <SubType>Designer</SubType>
@@ -206,12 +203,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Data\Database.edmx">
+    <EntityDeploy Include="Data\database.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Database.Designer.cs</LastGenOutput>
+      <LastGenOutput>database.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Data\Database.edmx.diagram">
-      <DependentUpon>Database.edmx</DependentUpon>
+    <None Include="Data\database.edmx.diagram">
+      <DependentUpon>database.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -223,25 +220,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Database.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Database.Context.cs</LastGenOutput>
-      <DependentUpon>Database.edmx</DependentUpon>
-    </Content>
-    <Content Include="Data\Database.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resourses\" />
     <Folder Include="Views\Create\" />
     <Folder Include="Views\Edit\" />
     <Folder Include="Views\Update\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\database.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>database.edmx</DependentUpon>
+      <LastGenOutput>database.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>database.edmx</DependentUpon>
+      <LastGenOutput>database.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,27 +12,28 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Проекты
+    public partial class Departments
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Проекты()
+        public Departments()
         {
-            this.ЭтапыПроектов = new HashSet<ЭтапыПроектов>();
-            this.Пользователи1 = new HashSet<Пользователи>();
+            this.Departments1 = new HashSet<Departments>();
+            this.Projects = new HashSet<Projects>();
+            this.Users = new HashSet<Users>();
         }
     
-        public int ПроектID { get; set; }
-        public string НазваниеПроекта { get; set; }
-        public string ОписаниеПроекта { get; set; }
-        public System.DateTime ДатаНачала { get; set; }
-        public Nullable<System.DateTime> ДатаОкончания { get; set; }
-        public int РуководительПроектаID { get; set; }
-        public string Статус { get; set; }
+        public int idDepartrment { get; set; }
+        public string nameDepartment { get; set; }
+        public Nullable<int> idDirectorDepartment { get; set; }
+        public Nullable<int> idSupportDirectorDepartment { get; set; }
+        public Nullable<int> idParentDepartment { get; set; }
     
-        public virtual Пользователи Пользователи { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ЭтапыПроектов> ЭтапыПроектов { get; set; }
+        public virtual ICollection<Departments> Departments1 { get; set; }
+        public virtual Departments Departments2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Пользователи> Пользователи1 { get; set; }
+        public virtual ICollection<Projects> Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.ComponentModel.DataAnnotations;
 namespace API.Models
 {
-    public class News
+    public class New
     {
+        [Key]
         public int НовостьID { get; set; }
         public string Заголовок { get; set; }
         public string Содержание { get; set; }

@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\ashura\source\repos\GK-Dorogi-Rossii\CorporatePortal\WPF\Data\Database.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\ashura\source\repos\GK-Dorogi-Rossii\CorporatePortal\WPF\Data\database.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

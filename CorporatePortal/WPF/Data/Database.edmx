@@ -4,7 +4,116 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище testsetsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище corporate_portalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="idDepartrment" />
+          </Key>
+          <Property Name="idDepartrment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameDepartment" Type="nvarchar" MaxLength="50" />
+          <Property Name="idDirectorDepartment" Type="int" />
+          <Property Name="idSupportDirectorDepartment" Type="int" />
+          <Property Name="idParentDepartment" Type="int" />
+        </EntityType>
+        <EntityType Name="EventMembers">
+          <Key>
+            <PropertyRef Name="idUser" />
+            <PropertyRef Name="idEvent" />
+          </Key>
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idEvent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="idEvent" />
+          </Key>
+          <Property Name="idEvent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameEvent" Type="nvarchar" MaxLength="50" />
+          <Property Name="idTypeEvent" Type="int" />
+          <Property Name="idStatusEvent" Type="int" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="descriptionEvent" Type="nvarchar" MaxLength="50" />
+          <Property Name="idInitiator" Type="int" />
+        </EntityType>
+        <EntityType Name="EventStatuses">
+          <Key>
+            <PropertyRef Name="idStatusEvent" />
+          </Key>
+          <Property Name="idStatusEvent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EventTypes">
+          <Key>
+            <PropertyRef Name="idTypeEvent" />
+          </Key>
+          <Property Name="idTypeEvent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="idNew" />
+          </Key>
+          <Property Name="idNew" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="createDate" Type="date" />
+          <Property Name="idCreator" Type="int" />
+        </EntityType>
+        <EntityType Name="ProjectMembers">
+          <Key>
+            <PropertyRef Name="idUser" />
+            <PropertyRef Name="idProject" />
+          </Key>
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idProject" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="idProject" />
+          </Key>
+          <Property Name="idProject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameProject" Type="nvarchar" MaxLength="50" />
+          <Property Name="descriptoinProject" Type="nvarchar" MaxLength="255" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="idDepartment" Type="int" />
+          <Property Name="idStatusProject" Type="int" />
+          <Property Name="idTypeProject" Type="int" />
+        </EntityType>
+        <EntityType Name="ProjectStages">
+          <Key>
+            <PropertyRef Name="idStageProject" />
+          </Key>
+          <Property Name="idStageProject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProject" Type="int" />
+          <Property Name="nameState" Type="nvarchar" MaxLength="50" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="idStatusStage" Type="int" />
+          <Property Name="descriptionStage" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ProjectStateStatuses">
+          <Key>
+            <PropertyRef Name="idStatusStage" />
+          </Key>
+          <Property Name="idStatusStage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProjectStatuses">
+          <Key>
+            <PropertyRef Name="idStatusProject" />
+          </Key>
+          <Property Name="idStatusProject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProjectTypes">
+          <Key>
+            <PropertyRef Name="idTypeProject" />
+          </Key>
+          <Property Name="idTypeProject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -15,655 +124,465 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Документы">
+        <EntityType Name="UserPositions">
           <Key>
-            <PropertyRef Name="ДокументID" />
+            <PropertyRef Name="idPosition" />
           </Key>
-          <Property Name="ДокументID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеДокумента" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ТипДокументаID" Type="int" Nullable="false" />
-          <Property Name="Категория" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="ДатаСоздания" Type="datetime" Nullable="false" />
-          <Property Name="Описание" Type="nvarchar(max)" />
-          <Property Name="СтатусДокументаID" Type="int" Nullable="false" />
-          <Property Name="Содержание" Type="varbinary(max)" />
-          <Property Name="СозданоПользователемID" Type="int" Nullable="false" />
+          <Property Name="idPosition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="namePosition" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Мероприятия">
+        <EntityType Name="UserRoles">
           <Key>
-            <PropertyRef Name="МероприятиеID" />
+            <PropertyRef Name="idRole" />
           </Key>
-          <Property Name="МероприятиеID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеМероприятия" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ТипМероприятияID" Type="int" Nullable="false" />
-          <Property Name="СтатусМероприятияID" Type="int" Nullable="false" />
-          <Property Name="ДатаНачала" Type="datetime" Nullable="false" />
-          <Property Name="ДатаОкончания" Type="datetime" Nullable="false" />
-          <Property Name="КраткоеОписание" Type="nvarchar(max)" />
-          <Property Name="ИнициаторID" Type="int" Nullable="false" />
+          <Property Name="idRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameRole" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Новости">
+        <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="НовостьID" />
+            <PropertyRef Name="idUser" />
           </Key>
-          <Property Name="НовостьID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Заголовок" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Содержание" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ДатаСоздания" Type="datetime" Nullable="false" />
-          <Property Name="СозданоПользователемID" Type="int" Nullable="false" />
+          <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="secondName" Type="nvarchar" MaxLength="50" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="idRole" Type="int" />
+          <Property Name="idDepartment" Type="int" />
+          <Property Name="idPosition" Type="int" />
+          <Property Name="workNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="homeNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="birthDay" Type="date" />
+          <Property Name="photoPath" Type="nvarchar" MaxLength="50" />
+          <Property Name="idSwapper" Type="int" />
         </EntityType>
-        <EntityType Name="ОтветственныеЗаДокумент">
-          <Key>
-            <PropertyRef Name="ОтветственныйID" />
-          </Key>
-          <Property Name="ОтветственныйID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ДокументID" Type="int" Nullable="false" />
-          <Property Name="ПользовательID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ОтветственныеЗаМероприятие">
-          <Key>
-            <PropertyRef Name="ОтветственныйID" />
-          </Key>
-          <Property Name="ОтветственныйID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="МероприятиеID" Type="int" Nullable="false" />
-          <Property Name="ПользовательID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Подразделения">
-          <Key>
-            <PropertyRef Name="ПодразделениеID" />
-          </Key>
-          <Property Name="ПодразделениеID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеПодразделения" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="РуководительПодразделения" Type="int" />
-          <Property Name="ПомощникРуководителя" Type="int" />
-        </EntityType>
-        <EntityType Name="Пользователи">
-          <Key>
-            <PropertyRef Name="ПользовательID" />
-          </Key>
-          <Property Name="ПользовательID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Логин" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Пароль" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Имя" Type="nvarchar" MaxLength="100" />
-          <Property Name="Фамилия" Type="nvarchar" MaxLength="100" />
-          <Property Name="Отчество" Type="nvarchar" MaxLength="100" />
-          <Property Name="ЭлПочта" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="РольID" Type="int" Nullable="false" />
-          <Property Name="ПодразделениеID" Type="int" />
-          <Property Name="Должность" Type="nvarchar" MaxLength="100" />
-          <Property Name="РабочийТелефон" Type="nvarchar" MaxLength="20" />
-          <Property Name="ДомашнийТелефон" Type="nvarchar" MaxLength="20" />
-          <Property Name="ДатаРождения" Type="date" />
-          <Property Name="РуководительID" Type="int" />
-          <Property Name="ЗаменяющийID" Type="int" />
-          <Property Name="ПутьКФото" Type="nvarchar" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="ПользователиПроекты">
-          <Key>
-            <PropertyRef Name="ПользовательID" />
-            <PropertyRef Name="ПроектID" />
-          </Key>
-          <Property Name="ПользовательID" Type="int" Nullable="false" />
-          <Property Name="ПроектID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Проекты">
-          <Key>
-            <PropertyRef Name="ПроектID" />
-          </Key>
-          <Property Name="ПроектID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеПроекта" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ОписаниеПроекта" Type="nvarchar(max)" />
-          <Property Name="ДатаНачала" Type="datetime" Nullable="false" />
-          <Property Name="ДатаОкончания" Type="datetime" />
-          <Property Name="РуководительПроектаID" Type="int" Nullable="false" />
-          <Property Name="Статус" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Роли">
-          <Key>
-            <PropertyRef Name="РольID" />
-          </Key>
-          <Property Name="РольID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеРоли" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="СобытияОтсутствия">
-          <Key>
-            <PropertyRef Name="СобытиеID" />
-          </Key>
-          <Property Name="СобытиеID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ПользовательID" Type="int" Nullable="false" />
-          <Property Name="ТипСобытия" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ДатаНачала" Type="date" Nullable="false" />
-          <Property Name="ДатаОкончания" Type="date" />
-          <Property Name="Описание" Type="nvarchar(max)" />
-          <Property Name="Место" Type="nvarchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="СогласующиеДокумент">
-          <Key>
-            <PropertyRef Name="СогласующийID" />
-          </Key>
-          <Property Name="СогласующийID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ДокументID" Type="int" Nullable="false" />
-          <Property Name="ПользовательID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="СтатусыДокументов">
-          <Key>
-            <PropertyRef Name="СтатусДокументаID" />
-          </Key>
-          <Property Name="СтатусДокументаID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеСтатуса" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="СтатусыМероприятий">
-          <Key>
-            <PropertyRef Name="СтатусМероприятияID" />
-          </Key>
-          <Property Name="СтатусМероприятияID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеСтатуса" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ТипыДокументов">
-          <Key>
-            <PropertyRef Name="ТипДокументаID" />
-          </Key>
-          <Property Name="ТипДокументаID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеТипа" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ТипыМероприятий">
-          <Key>
-            <PropertyRef Name="ТипМероприятияID" />
-          </Key>
-          <Property Name="ТипМероприятияID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="НазваниеТипа" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="УчастникиМероприятия">
-          <Key>
-            <PropertyRef Name="УчастникID" />
-          </Key>
-          <Property Name="УчастникID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="МероприятиеID" Type="int" Nullable="false" />
-          <Property Name="ПользовательID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ЭтапыДокументов">
-          <Key>
-            <PropertyRef Name="ЭтапID" />
-          </Key>
-          <Property Name="ЭтапID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ДокументID" Type="int" Nullable="false" />
-          <Property Name="НазваниеЭтапа" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ДатаНачалаЭтапа" Type="date" Nullable="false" />
-          <Property Name="ДатаОкончанияЭтапа" Type="date" />
-          <Property Name="ТекущийСтатусID" Type="int" Nullable="false" />
-          <Property Name="ОписаниеЭтапа" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="ЭтапыПроектов">
-          <Key>
-            <PropertyRef Name="ЭтапID" />
-          </Key>
-          <Property Name="ЭтапID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ПроектID" Type="int" Nullable="false" />
-          <Property Name="НазваниеЭтапа" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ДатаНачалаЭтапа" Type="date" Nullable="false" />
-          <Property Name="ДатаОкончанияЭтапа" Type="date" />
-          <Property Name="ТекущийСтатус" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ОписаниеЭтапа" Type="nvarchar(max)" />
-        </EntityType>
-        <Association Name="FK__Документы__Созда__5441852A">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="Документы" Type="Self.Документы" Multiplicity="*" />
+        <Association Name="FK_Departments_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Departments1" Type="Self.Departments" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="Departments">
+              <PropertyRef Name="idDepartrment" />
             </Principal>
-            <Dependent Role="Документы">
-              <PropertyRef Name="СозданоПользователемID" />
+            <Dependent Role="Departments1">
+              <PropertyRef Name="idParentDepartment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Документы__Стату__534D60F1">
-          <End Role="СтатусыДокументов" Type="Self.СтатусыДокументов" Multiplicity="1" />
-          <End Role="Документы" Type="Self.Документы" Multiplicity="*" />
+        <Association Name="FK_EventMembers_Events">
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="EventMembers" Type="Self.EventMembers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="СтатусыДокументов">
-              <PropertyRef Name="СтатусДокументаID" />
+            <Principal Role="Events">
+              <PropertyRef Name="idEvent" />
             </Principal>
-            <Dependent Role="Документы">
-              <PropertyRef Name="СтатусДокументаID" />
+            <Dependent Role="EventMembers">
+              <PropertyRef Name="idEvent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Документы__ТипДо__5165187F">
-          <End Role="ТипыДокументов" Type="Self.ТипыДокументов" Multiplicity="1" />
-          <End Role="Документы" Type="Self.Документы" Multiplicity="*" />
+        <Association Name="FK_EventMembers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="EventMembers" Type="Self.EventMembers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ТипыДокументов">
-              <PropertyRef Name="ТипДокументаID" />
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
             </Principal>
-            <Dependent Role="Документы">
-              <PropertyRef Name="ТипДокументаID" />
+            <Dependent Role="EventMembers">
+              <PropertyRef Name="idUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Мероприят__Иници__73BA3083">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="*" />
+        <Association Name="FK_Events_EventStatuses">
+          <End Role="EventStatuses" Type="Self.EventStatuses" Multiplicity="0..1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="EventStatuses">
+              <PropertyRef Name="idStatusEvent" />
             </Principal>
-            <Dependent Role="Мероприятия">
-              <PropertyRef Name="ИнициаторID" />
+            <Dependent Role="Events">
+              <PropertyRef Name="idStatusEvent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Мероприят__Стату__72C60C4A">
-          <End Role="СтатусыМероприятий" Type="Self.СтатусыМероприятий" Multiplicity="1" />
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="*" />
+        <Association Name="FK_Events_EventTypes">
+          <End Role="EventTypes" Type="Self.EventTypes" Multiplicity="0..1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="СтатусыМероприятий">
-              <PropertyRef Name="СтатусМероприятияID" />
+            <Principal Role="EventTypes">
+              <PropertyRef Name="idTypeEvent" />
             </Principal>
-            <Dependent Role="Мероприятия">
-              <PropertyRef Name="СтатусМероприятияID" />
+            <Dependent Role="Events">
+              <PropertyRef Name="idTypeEvent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Мероприят__ТипМе__71D1E811">
-          <End Role="ТипыМероприятий" Type="Self.ТипыМероприятий" Multiplicity="1" />
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="*" />
+        <Association Name="FK_Events_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ТипыМероприятий">
-              <PropertyRef Name="ТипМероприятияID" />
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
             </Principal>
-            <Dependent Role="Мероприятия">
-              <PropertyRef Name="ТипМероприятияID" />
+            <Dependent Role="Events">
+              <PropertyRef Name="idInitiator" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Новости__Создано__48CFD27E">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="Новости" Type="Self.Новости" Multiplicity="*" />
+        <Association Name="FK_News_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
             </Principal>
-            <Dependent Role="Новости">
-              <PropertyRef Name="СозданоПользователемID" />
+            <Dependent Role="News">
+              <PropertyRef Name="idCreator" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ответстве__Докум__5AEE82B9">
-          <End Role="Документы" Type="Self.Документы" Multiplicity="1" />
-          <End Role="ОтветственныеЗаДокумент" Type="Self.ОтветственныеЗаДокумент" Multiplicity="*" />
+        <Association Name="FK_ProjectMembers_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectMembers" Type="Self.ProjectMembers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Документы">
-              <PropertyRef Name="ДокументID" />
+            <Principal Role="Projects">
+              <PropertyRef Name="idProject" />
             </Principal>
-            <Dependent Role="ОтветственныеЗаДокумент">
-              <PropertyRef Name="ДокументID" />
+            <Dependent Role="ProjectMembers">
+              <PropertyRef Name="idProject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ответстве__Мероп__76969D2E">
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="1" />
-          <End Role="ОтветственныеЗаМероприятие" Type="Self.ОтветственныеЗаМероприятие" Multiplicity="*" />
+        <Association Name="FK_ProjectMembers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ProjectMembers" Type="Self.ProjectMembers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Мероприятия">
-              <PropertyRef Name="МероприятиеID" />
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
             </Principal>
-            <Dependent Role="ОтветственныеЗаМероприятие">
-              <PropertyRef Name="МероприятиеID" />
+            <Dependent Role="ProjectMembers">
+              <PropertyRef Name="idUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ответстве__Польз__5BE2A6F2">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="ОтветственныеЗаДокумент" Type="Self.ОтветственныеЗаДокумент" Multiplicity="*" />
+        <Association Name="FK_Projects_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="Departments">
+              <PropertyRef Name="idDepartrment" />
             </Principal>
-            <Dependent Role="ОтветственныеЗаДокумент">
-              <PropertyRef Name="ПользовательID" />
+            <Dependent Role="Projects">
+              <PropertyRef Name="idDepartment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ответстве__Польз__778AC167">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="ОтветственныеЗаМероприятие" Type="Self.ОтветственныеЗаМероприятие" Multiplicity="*" />
+        <Association Name="FK_Projects_ProjectStatuses">
+          <End Role="ProjectStatuses" Type="Self.ProjectStatuses" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="ProjectStatuses">
+              <PropertyRef Name="idStatusProject" />
             </Principal>
-            <Dependent Role="ОтветственныеЗаМероприятие">
-              <PropertyRef Name="ПользовательID" />
+            <Dependent Role="Projects">
+              <PropertyRef Name="idStatusProject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Подраздел__Помощ__4222D4EF">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
-          <End Role="Подразделения" Type="Self.Подразделения" Multiplicity="*" />
+        <Association Name="FK_Projects_ProjectTypes">
+          <End Role="ProjectTypes" Type="Self.ProjectTypes" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="ProjectTypes">
+              <PropertyRef Name="idTypeProject" />
             </Principal>
-            <Dependent Role="Подразделения">
-              <PropertyRef Name="ПомощникРуководителя" />
+            <Dependent Role="Projects">
+              <PropertyRef Name="idTypeProject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Подраздел__Руков__412EB0B6">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
-          <End Role="Подразделения" Type="Self.Подразделения" Multiplicity="*" />
+        <Association Name="FK_ProjectStages_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="ProjectStages" Type="Self.ProjectStages" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="Projects">
+              <PropertyRef Name="idProject" />
             </Principal>
-            <Dependent Role="Подразделения">
-              <PropertyRef Name="РуководительПодразделения" />
+            <Dependent Role="ProjectStages">
+              <PropertyRef Name="idProject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Пользоват__Замен__403A8C7D">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
-          <End Role="Пользователи1" Type="Self.Пользователи" Multiplicity="*" />
+        <Association Name="FK_ProjectStages_ProjectStateStatuses">
+          <End Role="ProjectStateStatuses" Type="Self.ProjectStateStatuses" Multiplicity="0..1" />
+          <End Role="ProjectStages" Type="Self.ProjectStages" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="ProjectStateStatuses">
+              <PropertyRef Name="idStatusStage" />
             </Principal>
-            <Dependent Role="Пользователи1">
-              <PropertyRef Name="ЗаменяющийID" />
+            <Dependent Role="ProjectStages">
+              <PropertyRef Name="idStatusStage" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Пользоват__Подра__3F466844">
-          <End Role="Подразделения" Type="Self.Подразделения" Multiplicity="0..1" />
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+        <Association Name="FK_Users_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Подразделения">
-              <PropertyRef Name="ПодразделениеID" />
+            <Principal Role="Departments">
+              <PropertyRef Name="idDepartrment" />
             </Principal>
-            <Dependent Role="Пользователи">
-              <PropertyRef Name="ПодразделениеID" />
+            <Dependent Role="Users">
+              <PropertyRef Name="idDepartment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Пользоват__Польз__68487DD7">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="ПользователиПроекты" Type="Self.ПользователиПроекты" Multiplicity="*" />
+        <Association Name="FK_Users_UserPositions">
+          <End Role="UserPositions" Type="Self.UserPositions" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="UserPositions">
+              <PropertyRef Name="idPosition" />
             </Principal>
-            <Dependent Role="ПользователиПроекты">
-              <PropertyRef Name="ПользовательID" />
+            <Dependent Role="Users">
+              <PropertyRef Name="idPosition" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Пользоват__Проек__693CA210">
-          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
-          <End Role="ПользователиПроекты" Type="Self.ПользователиПроекты" Multiplicity="*" />
+        <Association Name="FK_Users_UserRoles">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Проекты">
-              <PropertyRef Name="ПроектID" />
+            <Principal Role="UserRoles">
+              <PropertyRef Name="idRole" />
             </Principal>
-            <Dependent Role="ПользователиПроекты">
-              <PropertyRef Name="ПроектID" />
+            <Dependent Role="Users">
+              <PropertyRef Name="idRole" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Пользоват__РольI__3E52440B">
-          <End Role="Роли" Type="Self.Роли" Multiplicity="1" />
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+        <Association Name="FK_Users_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users1" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Роли">
-              <PropertyRef Name="РольID" />
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
             </Principal>
-            <Dependent Role="Пользователи">
-              <PropertyRef Name="РольID" />
+            <Dependent Role="Users1">
+              <PropertyRef Name="idSwapper" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Проекты__Руковод__628FA481">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="Проекты" Type="Self.Проекты" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="Проекты">
-              <PropertyRef Name="РуководительПроектаID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__СобытияОт__Польз__44FF419A">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="СобытияОтсутствия" Type="Self.СобытияОтсутствия" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="СобытияОтсутствия">
-              <PropertyRef Name="ПользовательID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Согласующ__Докум__5EBF139D">
-          <End Role="Документы" Type="Self.Документы" Multiplicity="1" />
-          <End Role="СогласующиеДокумент" Type="Self.СогласующиеДокумент" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Документы">
-              <PropertyRef Name="ДокументID" />
-            </Principal>
-            <Dependent Role="СогласующиеДокумент">
-              <PropertyRef Name="ДокументID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Согласующ__Польз__5FB337D6">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="СогласующиеДокумент" Type="Self.СогласующиеДокумент" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="СогласующиеДокумент">
-              <PropertyRef Name="ПользовательID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Участники__Мероп__7A672E12">
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="1" />
-          <End Role="УчастникиМероприятия" Type="Self.УчастникиМероприятия" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Мероприятия">
-              <PropertyRef Name="МероприятиеID" />
-            </Principal>
-            <Dependent Role="УчастникиМероприятия">
-              <PropertyRef Name="МероприятиеID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Участники__Польз__7B5B524B">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="УчастникиМероприятия" Type="Self.УчастникиМероприятия" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="УчастникиМероприятия">
-              <PropertyRef Name="ПользовательID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ЭтапыДоку__Докум__571DF1D5">
-          <End Role="Документы" Type="Self.Документы" Multiplicity="1" />
-          <End Role="ЭтапыДокументов" Type="Self.ЭтапыДокументов" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Документы">
-              <PropertyRef Name="ДокументID" />
-            </Principal>
-            <Dependent Role="ЭтапыДокументов">
-              <PropertyRef Name="ДокументID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ЭтапыДоку__Текущ__5812160E">
-          <End Role="СтатусыДокументов" Type="Self.СтатусыДокументов" Multiplicity="1" />
-          <End Role="ЭтапыДокументов" Type="Self.ЭтапыДокументов" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="СтатусыДокументов">
-              <PropertyRef Name="СтатусДокументаID" />
-            </Principal>
-            <Dependent Role="ЭтапыДокументов">
-              <PropertyRef Name="ТекущийСтатусID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ЭтапыПрое__Проек__656C112C">
-          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
-          <End Role="ЭтапыПроектов" Type="Self.ЭтапыПроектов" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Проекты">
-              <PropertyRef Name="ПроектID" />
-            </Principal>
-            <Dependent Role="ЭтапыПроектов">
-              <PropertyRef Name="ПроектID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="Хранилище testsetsModelContainer">
+        <EntityContainer Name="Хранилище corporate_portalModelContainer">
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventMembers" EntityType="Self.EventMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventStatuses" EntityType="Self.EventStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventTypes" EntityType="Self.EventTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectMembers" EntityType="Self.ProjectMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectStages" EntityType="Self.ProjectStages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectStateStatuses" EntityType="Self.ProjectStateStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectStatuses" EntityType="Self.ProjectStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTypes" EntityType="Self.ProjectTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Документы" EntityType="Self.Документы" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Мероприятия" EntityType="Self.Мероприятия" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Новости" EntityType="Self.Новости" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ОтветственныеЗаДокумент" EntityType="Self.ОтветственныеЗаДокумент" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ОтветственныеЗаМероприятие" EntityType="Self.ОтветственныеЗаМероприятие" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Подразделения" EntityType="Self.Подразделения" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ПользователиПроекты" EntityType="Self.ПользователиПроекты" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Проекты" EntityType="Self.Проекты" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="СобытияОтсутствия" EntityType="Self.СобытияОтсутствия" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="СогласующиеДокумент" EntityType="Self.СогласующиеДокумент" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="СтатусыДокументов" EntityType="Self.СтатусыДокументов" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="СтатусыМероприятий" EntityType="Self.СтатусыМероприятий" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ТипыДокументов" EntityType="Self.ТипыДокументов" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ТипыМероприятий" EntityType="Self.ТипыМероприятий" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="УчастникиМероприятия" EntityType="Self.УчастникиМероприятия" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ЭтапыДокументов" EntityType="Self.ЭтапыДокументов" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ЭтапыПроектов" EntityType="Self.ЭтапыПроектов" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Документы__Созда__5441852A" Association="Self.FK__Документы__Созда__5441852A">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Документы" EntitySet="Документы" />
+          <EntitySet Name="UserPositions" EntityType="Self.UserPositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Departments_Departments" Association="Self.FK_Departments_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Departments1" EntitySet="Departments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Документы__Стату__534D60F1" Association="Self.FK__Документы__Стату__534D60F1">
-            <End Role="СтатусыДокументов" EntitySet="СтатусыДокументов" />
-            <End Role="Документы" EntitySet="Документы" />
+          <AssociationSet Name="FK_EventMembers_Events" Association="Self.FK_EventMembers_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventMembers" EntitySet="EventMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Документы__ТипДо__5165187F" Association="Self.FK__Документы__ТипДо__5165187F">
-            <End Role="ТипыДокументов" EntitySet="ТипыДокументов" />
-            <End Role="Документы" EntitySet="Документы" />
+          <AssociationSet Name="FK_EventMembers_Users" Association="Self.FK_EventMembers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EventMembers" EntitySet="EventMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Мероприят__Иници__73BA3083" Association="Self.FK__Мероприят__Иници__73BA3083">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
+          <AssociationSet Name="FK_Events_EventStatuses" Association="Self.FK_Events_EventStatuses">
+            <End Role="EventStatuses" EntitySet="EventStatuses" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
-          <AssociationSet Name="FK__Мероприят__Стату__72C60C4A" Association="Self.FK__Мероприят__Стату__72C60C4A">
-            <End Role="СтатусыМероприятий" EntitySet="СтатусыМероприятий" />
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
+          <AssociationSet Name="FK_Events_EventTypes" Association="Self.FK_Events_EventTypes">
+            <End Role="EventTypes" EntitySet="EventTypes" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
-          <AssociationSet Name="FK__Мероприят__ТипМе__71D1E811" Association="Self.FK__Мероприят__ТипМе__71D1E811">
-            <End Role="ТипыМероприятий" EntitySet="ТипыМероприятий" />
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
+          <AssociationSet Name="FK_Events_Users" Association="Self.FK_Events_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
-          <AssociationSet Name="FK__Новости__Создано__48CFD27E" Association="Self.FK__Новости__Создано__48CFD27E">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Новости" EntitySet="Новости" />
+          <AssociationSet Name="FK_News_Users" Association="Self.FK_News_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="News" EntitySet="News" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ответстве__Докум__5AEE82B9" Association="Self.FK__Ответстве__Докум__5AEE82B9">
-            <End Role="Документы" EntitySet="Документы" />
-            <End Role="ОтветственныеЗаДокумент" EntitySet="ОтветственныеЗаДокумент" />
+          <AssociationSet Name="FK_ProjectMembers_Projects" Association="Self.FK_ProjectMembers_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectMembers" EntitySet="ProjectMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ответстве__Мероп__76969D2E" Association="Self.FK__Ответстве__Мероп__76969D2E">
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
-            <End Role="ОтветственныеЗаМероприятие" EntitySet="ОтветственныеЗаМероприятие" />
+          <AssociationSet Name="FK_ProjectMembers_Users" Association="Self.FK_ProjectMembers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectMembers" EntitySet="ProjectMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ответстве__Польз__5BE2A6F2" Association="Self.FK__Ответстве__Польз__5BE2A6F2">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="ОтветственныеЗаДокумент" EntitySet="ОтветственныеЗаДокумент" />
+          <AssociationSet Name="FK_Projects_Departments" Association="Self.FK_Projects_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ответстве__Польз__778AC167" Association="Self.FK__Ответстве__Польз__778AC167">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="ОтветственныеЗаМероприятие" EntitySet="ОтветственныеЗаМероприятие" />
+          <AssociationSet Name="FK_Projects_ProjectStatuses" Association="Self.FK_Projects_ProjectStatuses">
+            <End Role="ProjectStatuses" EntitySet="ProjectStatuses" />
+            <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
-          <AssociationSet Name="FK__Подраздел__Помощ__4222D4EF" Association="Self.FK__Подраздел__Помощ__4222D4EF">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Подразделения" EntitySet="Подразделения" />
+          <AssociationSet Name="FK_Projects_ProjectTypes" Association="Self.FK_Projects_ProjectTypes">
+            <End Role="ProjectTypes" EntitySet="ProjectTypes" />
+            <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
-          <AssociationSet Name="FK__Подраздел__Руков__412EB0B6" Association="Self.FK__Подраздел__Руков__412EB0B6">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Подразделения" EntitySet="Подразделения" />
+          <AssociationSet Name="FK_ProjectStages_Projects" Association="Self.FK_ProjectStages_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectStages" EntitySet="ProjectStages" />
           </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Замен__403A8C7D" Association="Self.FK__Пользоват__Замен__403A8C7D">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Пользователи1" EntitySet="Пользователи" />
+          <AssociationSet Name="FK_ProjectStages_ProjectStateStatuses" Association="Self.FK_ProjectStages_ProjectStateStatuses">
+            <End Role="ProjectStateStatuses" EntitySet="ProjectStateStatuses" />
+            <End Role="ProjectStages" EntitySet="ProjectStages" />
           </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Подра__3F466844" Association="Self.FK__Пользоват__Подра__3F466844">
-            <End Role="Подразделения" EntitySet="Подразделения" />
-            <End Role="Пользователи" EntitySet="Пользователи" />
+          <AssociationSet Name="FK_Users_Departments" Association="Self.FK_Users_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Польз__68487DD7" Association="Self.FK__Пользоват__Польз__68487DD7">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="ПользователиПроекты" EntitySet="ПользователиПроекты" />
+          <AssociationSet Name="FK_Users_UserPositions" Association="Self.FK_Users_UserPositions">
+            <End Role="UserPositions" EntitySet="UserPositions" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Проек__693CA210" Association="Self.FK__Пользоват__Проек__693CA210">
-            <End Role="Проекты" EntitySet="Проекты" />
-            <End Role="ПользователиПроекты" EntitySet="ПользователиПроекты" />
+          <AssociationSet Name="FK_Users_UserRoles" Association="Self.FK_Users_UserRoles">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__РольI__3E52440B" Association="Self.FK__Пользоват__РольI__3E52440B">
-            <End Role="Роли" EntitySet="Роли" />
-            <End Role="Пользователи" EntitySet="Пользователи" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Проекты__Руковод__628FA481" Association="Self.FK__Проекты__Руковод__628FA481">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Проекты" EntitySet="Проекты" />
-          </AssociationSet>
-          <AssociationSet Name="FK__СобытияОт__Польз__44FF419A" Association="Self.FK__СобытияОт__Польз__44FF419A">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="СобытияОтсутствия" EntitySet="СобытияОтсутствия" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Согласующ__Докум__5EBF139D" Association="Self.FK__Согласующ__Докум__5EBF139D">
-            <End Role="Документы" EntitySet="Документы" />
-            <End Role="СогласующиеДокумент" EntitySet="СогласующиеДокумент" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Согласующ__Польз__5FB337D6" Association="Self.FK__Согласующ__Польз__5FB337D6">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="СогласующиеДокумент" EntitySet="СогласующиеДокумент" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Участники__Мероп__7A672E12" Association="Self.FK__Участники__Мероп__7A672E12">
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
-            <End Role="УчастникиМероприятия" EntitySet="УчастникиМероприятия" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Участники__Польз__7B5B524B" Association="Self.FK__Участники__Польз__7B5B524B">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="УчастникиМероприятия" EntitySet="УчастникиМероприятия" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ЭтапыДоку__Докум__571DF1D5" Association="Self.FK__ЭтапыДоку__Докум__571DF1D5">
-            <End Role="Документы" EntitySet="Документы" />
-            <End Role="ЭтапыДокументов" EntitySet="ЭтапыДокументов" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ЭтапыДоку__Текущ__5812160E" Association="Self.FK__ЭтапыДоку__Текущ__5812160E">
-            <End Role="СтатусыДокументов" EntitySet="СтатусыДокументов" />
-            <End Role="ЭтапыДокументов" EntitySet="ЭтапыДокументов" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ЭтапыПрое__Проек__656C112C" Association="Self.FK__ЭтапыПрое__Проек__656C112C">
-            <End Role="Проекты" EntitySet="Проекты" />
-            <End Role="ЭтапыПроектов" EntitySet="ЭтапыПроектов" />
+          <AssociationSet Name="FK_Users_Users" Association="Self.FK_Users_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="testsetsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="corporate_portalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="idDepartrment" />
+          </Key>
+          <Property Name="idDepartrment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idDirectorDepartment" Type="Int32" />
+          <Property Name="idSupportDirectorDepartment" Type="Int32" />
+          <Property Name="idParentDepartment" Type="Int32" />
+          <NavigationProperty Name="Departments1" Relationship="Self.FK_Departments_Departments" FromRole="Departments" ToRole="Departments1" />
+          <NavigationProperty Name="Departments2" Relationship="Self.FK_Departments_Departments" FromRole="Departments1" ToRole="Departments" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_Departments" FromRole="Departments" ToRole="Projects" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Departments" FromRole="Departments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="idEvent" />
+          </Key>
+          <Property Name="idEvent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameEvent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idTypeEvent" Type="Int32" />
+          <Property Name="idStatusEvent" Type="Int32" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <Property Name="descriptionEvent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idInitiator" Type="Int32" />
+          <NavigationProperty Name="EventStatuses" Relationship="Self.FK_Events_EventStatuses" FromRole="Events" ToRole="EventStatuses" />
+          <NavigationProperty Name="EventTypes" Relationship="Self.FK_Events_EventTypes" FromRole="Events" ToRole="EventTypes" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Events_Users" FromRole="Events" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.EventMembers" FromRole="Events" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="EventStatuses">
+          <Key>
+            <PropertyRef Name="idStatusEvent" />
+          </Key>
+          <Property Name="idStatusEvent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Events_EventStatuses" FromRole="EventStatuses" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="EventTypes">
+          <Key>
+            <PropertyRef Name="idTypeEvent" />
+          </Key>
+          <Property Name="idTypeEvent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Events_EventTypes" FromRole="EventTypes" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="idNew" />
+          </Key>
+          <Property Name="idNew" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="createDate" Type="DateTime" Precision="0" />
+          <Property Name="idCreator" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_News_Users" FromRole="News" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="idProject" />
+          </Key>
+          <Property Name="idProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameProject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="descriptoinProject" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <Property Name="idDepartment" Type="Int32" />
+          <Property Name="idStatusProject" Type="Int32" />
+          <Property Name="idTypeProject" Type="Int32" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Projects_Departments" FromRole="Projects" ToRole="Departments" />
+          <NavigationProperty Name="ProjectStatuses" Relationship="Self.FK_Projects_ProjectStatuses" FromRole="Projects" ToRole="ProjectStatuses" />
+          <NavigationProperty Name="ProjectTypes" Relationship="Self.FK_Projects_ProjectTypes" FromRole="Projects" ToRole="ProjectTypes" />
+          <NavigationProperty Name="ProjectStages" Relationship="Self.FK_ProjectStages_Projects" FromRole="Projects" ToRole="ProjectStages" />
+          <NavigationProperty Name="Users" Relationship="Self.ProjectMembers" FromRole="Projects" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ProjectStages">
+          <Key>
+            <PropertyRef Name="idStageProject" />
+          </Key>
+          <Property Name="idStageProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProject" Type="Int32" />
+          <Property Name="nameState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <Property Name="idStatusStage" Type="Int32" />
+          <Property Name="descriptionStage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectStages_Projects" FromRole="ProjectStages" ToRole="Projects" />
+          <NavigationProperty Name="ProjectStateStatuses" Relationship="Self.FK_ProjectStages_ProjectStateStatuses" FromRole="ProjectStages" ToRole="ProjectStateStatuses" />
+        </EntityType>
+        <EntityType Name="ProjectStateStatuses">
+          <Key>
+            <PropertyRef Name="idStatusStage" />
+          </Key>
+          <Property Name="idStatusStage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProjectStages" Relationship="Self.FK_ProjectStages_ProjectStateStatuses" FromRole="ProjectStateStatuses" ToRole="ProjectStages" />
+        </EntityType>
+        <EntityType Name="ProjectStatuses">
+          <Key>
+            <PropertyRef Name="idStatusProject" />
+          </Key>
+          <Property Name="idStatusProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_ProjectStatuses" FromRole="ProjectStatuses" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="ProjectTypes">
+          <Key>
+            <PropertyRef Name="idTypeProject" />
+          </Key>
+          <Property Name="idTypeProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_ProjectTypes" FromRole="ProjectTypes" ToRole="Projects" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -674,667 +593,305 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Документы">
+        <EntityType Name="UserPositions">
           <Key>
-            <PropertyRef Name="ДокументID" />
+            <PropertyRef Name="idPosition" />
           </Key>
-          <Property Name="ДокументID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеДокумента" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ТипДокументаID" Type="Int32" Nullable="false" />
-          <Property Name="Категория" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ДатаСоздания" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="СтатусДокументаID" Type="Int32" Nullable="false" />
-          <Property Name="Содержание" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="СозданоПользователемID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Документы__Созда__5441852A" FromRole="Документы" ToRole="Пользователи" />
-          <NavigationProperty Name="СтатусыДокументов" Relationship="Self.FK__Документы__Стату__534D60F1" FromRole="Документы" ToRole="СтатусыДокументов" />
-          <NavigationProperty Name="ТипыДокументов" Relationship="Self.FK__Документы__ТипДо__5165187F" FromRole="Документы" ToRole="ТипыДокументов" />
-          <NavigationProperty Name="ОтветственныеЗаДокумент" Relationship="Self.FK__Ответстве__Докум__5AEE82B9" FromRole="Документы" ToRole="ОтветственныеЗаДокумент" />
-          <NavigationProperty Name="СогласующиеДокумент" Relationship="Self.FK__Согласующ__Докум__5EBF139D" FromRole="Документы" ToRole="СогласующиеДокумент" />
-          <NavigationProperty Name="ЭтапыДокументов" Relationship="Self.FK__ЭтапыДоку__Докум__571DF1D5" FromRole="Документы" ToRole="ЭтапыДокументов" />
+          <Property Name="idPosition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="namePosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserPositions" FromRole="UserPositions" ToRole="Users" />
         </EntityType>
-        <EntityType Name="Мероприятия">
+        <EntityType Name="UserRoles">
           <Key>
-            <PropertyRef Name="МероприятиеID" />
+            <PropertyRef Name="idRole" />
           </Key>
-          <Property Name="МероприятиеID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеМероприятия" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ТипМероприятияID" Type="Int32" Nullable="false" />
-          <Property Name="СтатусМероприятияID" Type="Int32" Nullable="false" />
-          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ДатаОкончания" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="КраткоеОписание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ИнициаторID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Мероприят__Иници__73BA3083" FromRole="Мероприятия" ToRole="Пользователи" />
-          <NavigationProperty Name="СтатусыМероприятий" Relationship="Self.FK__Мероприят__Стату__72C60C4A" FromRole="Мероприятия" ToRole="СтатусыМероприятий" />
-          <NavigationProperty Name="ТипыМероприятий" Relationship="Self.FK__Мероприят__ТипМе__71D1E811" FromRole="Мероприятия" ToRole="ТипыМероприятий" />
-          <NavigationProperty Name="ОтветственныеЗаМероприятие" Relationship="Self.FK__Ответстве__Мероп__76969D2E" FromRole="Мероприятия" ToRole="ОтветственныеЗаМероприятие" />
-          <NavigationProperty Name="УчастникиМероприятия" Relationship="Self.FK__Участники__Мероп__7A672E12" FromRole="Мероприятия" ToRole="УчастникиМероприятия" />
+          <Property Name="idRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserRoles" FromRole="UserRoles" ToRole="Users" />
         </EntityType>
-        <EntityType Name="Новости">
+        <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="НовостьID" />
+            <PropertyRef Name="idUser" />
           </Key>
-          <Property Name="НовостьID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Заголовок" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Содержание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ДатаСоздания" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="СозданоПользователемID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Новости__Создано__48CFD27E" FromRole="Новости" ToRole="Пользователи" />
+          <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idRole" Type="Int32" />
+          <Property Name="idDepartment" Type="Int32" />
+          <Property Name="idPosition" Type="Int32" />
+          <Property Name="workNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="homeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birthDay" Type="DateTime" Precision="0" />
+          <Property Name="photoPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idSwapper" Type="Int32" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Users_Departments" FromRole="Users" ToRole="Departments" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Events_Users" FromRole="Users" ToRole="Events" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_Users" FromRole="Users" ToRole="News" />
+          <NavigationProperty Name="UserPositions" Relationship="Self.FK_Users_UserPositions" FromRole="Users" ToRole="UserPositions" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_Users_UserRoles" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_Users_Users" FromRole="Users" ToRole="Users1" />
+          <NavigationProperty Name="Users2" Relationship="Self.FK_Users_Users" FromRole="Users1" ToRole="Users" />
+          <NavigationProperty Name="Events1" Relationship="Self.EventMembers" FromRole="Users" ToRole="Events" />
+          <NavigationProperty Name="Projects" Relationship="Self.ProjectMembers" FromRole="Users" ToRole="Projects" />
         </EntityType>
-        <EntityType Name="ОтветственныеЗаДокумент">
-          <Key>
-            <PropertyRef Name="ОтветственныйID" />
-          </Key>
-          <Property Name="ОтветственныйID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ДокументID" Type="Int32" Nullable="false" />
-          <Property Name="ПользовательID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Документы" Relationship="Self.FK__Ответстве__Докум__5AEE82B9" FromRole="ОтветственныеЗаДокумент" ToRole="Документы" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Ответстве__Польз__5BE2A6F2" FromRole="ОтветственныеЗаДокумент" ToRole="Пользователи" />
-        </EntityType>
-        <EntityType Name="ОтветственныеЗаМероприятие">
-          <Key>
-            <PropertyRef Name="ОтветственныйID" />
-          </Key>
-          <Property Name="ОтветственныйID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="МероприятиеID" Type="Int32" Nullable="false" />
-          <Property Name="ПользовательID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Мероприятия" Relationship="Self.FK__Ответстве__Мероп__76969D2E" FromRole="ОтветственныеЗаМероприятие" ToRole="Мероприятия" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Ответстве__Польз__778AC167" FromRole="ОтветственныеЗаМероприятие" ToRole="Пользователи" />
-        </EntityType>
-        <EntityType Name="Подразделения">
-          <Key>
-            <PropertyRef Name="ПодразделениеID" />
-          </Key>
-          <Property Name="ПодразделениеID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеПодразделения" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="РуководительПодразделения" Type="Int32" />
-          <Property Name="ПомощникРуководителя" Type="Int32" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Подраздел__Помощ__4222D4EF" FromRole="Подразделения" ToRole="Пользователи" />
-          <NavigationProperty Name="Пользователи1" Relationship="Self.FK__Подраздел__Руков__412EB0B6" FromRole="Подразделения" ToRole="Пользователи" />
-          <NavigationProperty Name="Пользователи2" Relationship="Self.FK__Пользоват__Подра__3F466844" FromRole="Подразделения" ToRole="Пользователи" />
-        </EntityType>
-        <EntityType Name="Пользователи">
-          <Key>
-            <PropertyRef Name="ПользовательID" />
-          </Key>
-          <Property Name="ПользовательID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Пароль" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Имя" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Фамилия" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Отчество" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ЭлПочта" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="РольID" Type="Int32" Nullable="false" />
-          <Property Name="ПодразделениеID" Type="Int32" />
-          <Property Name="Должность" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="РабочийТелефон" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ДомашнийТелефон" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ДатаРождения" Type="DateTime" Precision="0" />
-          <Property Name="РуководительID" Type="Int32" />
-          <Property Name="ЗаменяющийID" Type="Int32" />
-          <Property Name="ПутьКФото" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Документы" Relationship="Self.FK__Документы__Созда__5441852A" FromRole="Пользователи" ToRole="Документы" />
-          <NavigationProperty Name="Мероприятия" Relationship="Self.FK__Мероприят__Иници__73BA3083" FromRole="Пользователи" ToRole="Мероприятия" />
-          <NavigationProperty Name="Новости" Relationship="Self.FK__Новости__Создано__48CFD27E" FromRole="Пользователи" ToRole="Новости" />
-          <NavigationProperty Name="ОтветственныеЗаДокумент" Relationship="Self.FK__Ответстве__Польз__5BE2A6F2" FromRole="Пользователи" ToRole="ОтветственныеЗаДокумент" />
-          <NavigationProperty Name="ОтветственныеЗаМероприятие" Relationship="Self.FK__Ответстве__Польз__778AC167" FromRole="Пользователи" ToRole="ОтветственныеЗаМероприятие" />
-          <NavigationProperty Name="Подразделения" Relationship="Self.FK__Подраздел__Помощ__4222D4EF" FromRole="Пользователи" ToRole="Подразделения" />
-          <NavigationProperty Name="Подразделения1" Relationship="Self.FK__Подраздел__Руков__412EB0B6" FromRole="Пользователи" ToRole="Подразделения" />
-          <NavigationProperty Name="Подразделения2" Relationship="Self.FK__Пользоват__Подра__3F466844" FromRole="Пользователи" ToRole="Подразделения" />
-          <NavigationProperty Name="Пользователи1" Relationship="Self.FK__Пользоват__Замен__403A8C7D" FromRole="Пользователи" ToRole="Пользователи1" />
-          <NavigationProperty Name="Пользователи2" Relationship="Self.FK__Пользоват__Замен__403A8C7D" FromRole="Пользователи1" ToRole="Пользователи" />
-          <NavigationProperty Name="Роли" Relationship="Self.FK__Пользоват__РольI__3E52440B" FromRole="Пользователи" ToRole="Роли" />
-          <NavigationProperty Name="Проекты" Relationship="Self.FK__Проекты__Руковод__628FA481" FromRole="Пользователи" ToRole="Проекты" />
-          <NavigationProperty Name="СобытияОтсутствия" Relationship="Self.FK__СобытияОт__Польз__44FF419A" FromRole="Пользователи" ToRole="СобытияОтсутствия" />
-          <NavigationProperty Name="СогласующиеДокумент" Relationship="Self.FK__Согласующ__Польз__5FB337D6" FromRole="Пользователи" ToRole="СогласующиеДокумент" />
-          <NavigationProperty Name="УчастникиМероприятия" Relationship="Self.FK__Участники__Польз__7B5B524B" FromRole="Пользователи" ToRole="УчастникиМероприятия" />
-          <NavigationProperty Name="Проекты1" Relationship="Self.ПользователиПроекты" FromRole="Пользователи" ToRole="Проекты" />
-        </EntityType>
-        <EntityType Name="Проекты">
-          <Key>
-            <PropertyRef Name="ПроектID" />
-          </Key>
-          <Property Name="ПроектID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеПроекта" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ОписаниеПроекта" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ДатаОкончания" Type="DateTime" Precision="3" />
-          <Property Name="РуководительПроектаID" Type="Int32" Nullable="false" />
-          <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Проекты__Руковод__628FA481" FromRole="Проекты" ToRole="Пользователи" />
-          <NavigationProperty Name="ЭтапыПроектов" Relationship="Self.FK__ЭтапыПрое__Проек__656C112C" FromRole="Проекты" ToRole="ЭтапыПроектов" />
-          <NavigationProperty Name="Пользователи1" Relationship="Self.ПользователиПроекты" FromRole="Проекты" ToRole="Пользователи" />
-        </EntityType>
-        <EntityType Name="Роли">
-          <Key>
-            <PropertyRef Name="РольID" />
-          </Key>
-          <Property Name="РольID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеРоли" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Пользоват__РольI__3E52440B" FromRole="Роли" ToRole="Пользователи" />
-        </EntityType>
-        <EntityType Name="СобытияОтсутствия">
-          <Key>
-            <PropertyRef Name="СобытиеID" />
-          </Key>
-          <Property Name="СобытиеID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ПользовательID" Type="Int32" Nullable="false" />
-          <Property Name="ТипСобытия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ДатаОкончания" Type="DateTime" Precision="0" />
-          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Место" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__СобытияОт__Польз__44FF419A" FromRole="СобытияОтсутствия" ToRole="Пользователи" />
-        </EntityType>
-        <EntityType Name="СогласующиеДокумент">
-          <Key>
-            <PropertyRef Name="СогласующийID" />
-          </Key>
-          <Property Name="СогласующийID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ДокументID" Type="Int32" Nullable="false" />
-          <Property Name="ПользовательID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Документы" Relationship="Self.FK__Согласующ__Докум__5EBF139D" FromRole="СогласующиеДокумент" ToRole="Документы" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Согласующ__Польз__5FB337D6" FromRole="СогласующиеДокумент" ToRole="Пользователи" />
-        </EntityType>
-        <EntityType Name="СтатусыДокументов">
-          <Key>
-            <PropertyRef Name="СтатусДокументаID" />
-          </Key>
-          <Property Name="СтатусДокументаID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеСтатуса" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Документы" Relationship="Self.FK__Документы__Стату__534D60F1" FromRole="СтатусыДокументов" ToRole="Документы" />
-          <NavigationProperty Name="ЭтапыДокументов" Relationship="Self.FK__ЭтапыДоку__Текущ__5812160E" FromRole="СтатусыДокументов" ToRole="ЭтапыДокументов" />
-        </EntityType>
-        <EntityType Name="СтатусыМероприятий">
-          <Key>
-            <PropertyRef Name="СтатусМероприятияID" />
-          </Key>
-          <Property Name="СтатусМероприятияID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеСтатуса" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Мероприятия" Relationship="Self.FK__Мероприят__Стату__72C60C4A" FromRole="СтатусыМероприятий" ToRole="Мероприятия" />
-        </EntityType>
-        <EntityType Name="ТипыДокументов">
-          <Key>
-            <PropertyRef Name="ТипДокументаID" />
-          </Key>
-          <Property Name="ТипДокументаID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеТипа" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Документы" Relationship="Self.FK__Документы__ТипДо__5165187F" FromRole="ТипыДокументов" ToRole="Документы" />
-        </EntityType>
-        <EntityType Name="ТипыМероприятий">
-          <Key>
-            <PropertyRef Name="ТипМероприятияID" />
-          </Key>
-          <Property Name="ТипМероприятияID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="НазваниеТипа" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Мероприятия" Relationship="Self.FK__Мероприят__ТипМе__71D1E811" FromRole="ТипыМероприятий" ToRole="Мероприятия" />
-        </EntityType>
-        <EntityType Name="УчастникиМероприятия">
-          <Key>
-            <PropertyRef Name="УчастникID" />
-          </Key>
-          <Property Name="УчастникID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="МероприятиеID" Type="Int32" Nullable="false" />
-          <Property Name="ПользовательID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Мероприятия" Relationship="Self.FK__Участники__Мероп__7A672E12" FromRole="УчастникиМероприятия" ToRole="Мероприятия" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Участники__Польз__7B5B524B" FromRole="УчастникиМероприятия" ToRole="Пользователи" />
-        </EntityType>
-        <EntityType Name="ЭтапыДокументов">
-          <Key>
-            <PropertyRef Name="ЭтапID" />
-          </Key>
-          <Property Name="ЭтапID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ДокументID" Type="Int32" Nullable="false" />
-          <Property Name="НазваниеЭтапа" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ДатаНачалаЭтапа" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ДатаОкончанияЭтапа" Type="DateTime" Precision="0" />
-          <Property Name="ТекущийСтатусID" Type="Int32" Nullable="false" />
-          <Property Name="ОписаниеЭтапа" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Документы" Relationship="Self.FK__ЭтапыДоку__Докум__571DF1D5" FromRole="ЭтапыДокументов" ToRole="Документы" />
-          <NavigationProperty Name="СтатусыДокументов" Relationship="Self.FK__ЭтапыДоку__Текущ__5812160E" FromRole="ЭтапыДокументов" ToRole="СтатусыДокументов" />
-        </EntityType>
-        <EntityType Name="ЭтапыПроектов">
-          <Key>
-            <PropertyRef Name="ЭтапID" />
-          </Key>
-          <Property Name="ЭтапID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ПроектID" Type="Int32" Nullable="false" />
-          <Property Name="НазваниеЭтапа" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ДатаНачалаЭтапа" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ДатаОкончанияЭтапа" Type="DateTime" Precision="0" />
-          <Property Name="ТекущийСтатус" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ОписаниеЭтапа" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Проекты" Relationship="Self.FK__ЭтапыПрое__Проек__656C112C" FromRole="ЭтапыПроектов" ToRole="Проекты" />
-        </EntityType>
-        <Association Name="FK__Документы__Созда__5441852A">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="Документы" Type="Self.Документы" Multiplicity="*" />
+        <Association Name="FK_Departments_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Departments1" Type="Self.Departments" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="Departments">
+              <PropertyRef Name="idDepartrment" />
             </Principal>
-            <Dependent Role="Документы">
-              <PropertyRef Name="СозданоПользователемID" />
+            <Dependent Role="Departments1">
+              <PropertyRef Name="idParentDepartment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Документы__Стату__534D60F1">
-          <End Role="СтатусыДокументов" Type="Self.СтатусыДокументов" Multiplicity="1" />
-          <End Role="Документы" Type="Self.Документы" Multiplicity="*" />
+        <Association Name="FK_Projects_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="СтатусыДокументов">
-              <PropertyRef Name="СтатусДокументаID" />
+            <Principal Role="Departments">
+              <PropertyRef Name="idDepartrment" />
             </Principal>
-            <Dependent Role="Документы">
-              <PropertyRef Name="СтатусДокументаID" />
+            <Dependent Role="Projects">
+              <PropertyRef Name="idDepartment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Документы__ТипДо__5165187F">
-          <End Role="ТипыДокументов" Type="Self.ТипыДокументов" Multiplicity="1" />
-          <End Role="Документы" Type="Self.Документы" Multiplicity="*" />
+        <Association Name="FK_Users_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ТипыДокументов">
-              <PropertyRef Name="ТипДокументаID" />
+            <Principal Role="Departments">
+              <PropertyRef Name="idDepartrment" />
             </Principal>
-            <Dependent Role="Документы">
-              <PropertyRef Name="ТипДокументаID" />
+            <Dependent Role="Users">
+              <PropertyRef Name="idDepartment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ответстве__Докум__5AEE82B9">
-          <End Role="Документы" Type="Self.Документы" Multiplicity="1" />
-          <End Role="ОтветственныеЗаДокумент" Type="Self.ОтветственныеЗаДокумент" Multiplicity="*" />
+        <Association Name="FK_Events_EventStatuses">
+          <End Role="EventStatuses" Type="Self.EventStatuses" Multiplicity="0..1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Документы">
-              <PropertyRef Name="ДокументID" />
+            <Principal Role="EventStatuses">
+              <PropertyRef Name="idStatusEvent" />
             </Principal>
-            <Dependent Role="ОтветственныеЗаДокумент">
-              <PropertyRef Name="ДокументID" />
+            <Dependent Role="Events">
+              <PropertyRef Name="idStatusEvent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Согласующ__Докум__5EBF139D">
-          <End Role="Документы" Type="Self.Документы" Multiplicity="1" />
-          <End Role="СогласующиеДокумент" Type="Self.СогласующиеДокумент" Multiplicity="*" />
+        <Association Name="FK_Events_EventTypes">
+          <End Role="EventTypes" Type="Self.EventTypes" Multiplicity="0..1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Документы">
-              <PropertyRef Name="ДокументID" />
+            <Principal Role="EventTypes">
+              <PropertyRef Name="idTypeEvent" />
             </Principal>
-            <Dependent Role="СогласующиеДокумент">
-              <PropertyRef Name="ДокументID" />
+            <Dependent Role="Events">
+              <PropertyRef Name="idTypeEvent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ЭтапыДоку__Докум__571DF1D5">
-          <End Role="Документы" Type="Self.Документы" Multiplicity="1" />
-          <End Role="ЭтапыДокументов" Type="Self.ЭтапыДокументов" Multiplicity="*" />
+        <Association Name="FK_Events_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Документы">
-              <PropertyRef Name="ДокументID" />
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
             </Principal>
-            <Dependent Role="ЭтапыДокументов">
-              <PropertyRef Name="ДокументID" />
+            <Dependent Role="Events">
+              <PropertyRef Name="idInitiator" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Мероприят__Иници__73BA3083">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="*" />
+        <Association Name="FK_News_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
             </Principal>
-            <Dependent Role="Мероприятия">
-              <PropertyRef Name="ИнициаторID" />
+            <Dependent Role="News">
+              <PropertyRef Name="idCreator" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Мероприят__Стату__72C60C4A">
-          <End Role="СтатусыМероприятий" Type="Self.СтатусыМероприятий" Multiplicity="1" />
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="*" />
+        <Association Name="FK_Projects_ProjectStatuses">
+          <End Role="ProjectStatuses" Type="Self.ProjectStatuses" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="СтатусыМероприятий">
-              <PropertyRef Name="СтатусМероприятияID" />
+            <Principal Role="ProjectStatuses">
+              <PropertyRef Name="idStatusProject" />
             </Principal>
-            <Dependent Role="Мероприятия">
-              <PropertyRef Name="СтатусМероприятияID" />
+            <Dependent Role="Projects">
+              <PropertyRef Name="idStatusProject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Мероприят__ТипМе__71D1E811">
-          <End Role="ТипыМероприятий" Type="Self.ТипыМероприятий" Multiplicity="1" />
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="*" />
+        <Association Name="FK_Projects_ProjectTypes">
+          <End Role="ProjectTypes" Type="Self.ProjectTypes" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ТипыМероприятий">
-              <PropertyRef Name="ТипМероприятияID" />
+            <Principal Role="ProjectTypes">
+              <PropertyRef Name="idTypeProject" />
             </Principal>
-            <Dependent Role="Мероприятия">
-              <PropertyRef Name="ТипМероприятияID" />
+            <Dependent Role="Projects">
+              <PropertyRef Name="idTypeProject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ответстве__Мероп__76969D2E">
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="1" />
-          <End Role="ОтветственныеЗаМероприятие" Type="Self.ОтветственныеЗаМероприятие" Multiplicity="*" />
+        <Association Name="FK_ProjectStages_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="ProjectStages" Type="Self.ProjectStages" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Мероприятия">
-              <PropertyRef Name="МероприятиеID" />
+            <Principal Role="Projects">
+              <PropertyRef Name="idProject" />
             </Principal>
-            <Dependent Role="ОтветственныеЗаМероприятие">
-              <PropertyRef Name="МероприятиеID" />
+            <Dependent Role="ProjectStages">
+              <PropertyRef Name="idProject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Участники__Мероп__7A672E12">
-          <End Role="Мероприятия" Type="Self.Мероприятия" Multiplicity="1" />
-          <End Role="УчастникиМероприятия" Type="Self.УчастникиМероприятия" Multiplicity="*" />
+        <Association Name="FK_ProjectStages_ProjectStateStatuses">
+          <End Role="ProjectStateStatuses" Type="Self.ProjectStateStatuses" Multiplicity="0..1" />
+          <End Role="ProjectStages" Type="Self.ProjectStages" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Мероприятия">
-              <PropertyRef Name="МероприятиеID" />
+            <Principal Role="ProjectStateStatuses">
+              <PropertyRef Name="idStatusStage" />
             </Principal>
-            <Dependent Role="УчастникиМероприятия">
-              <PropertyRef Name="МероприятиеID" />
+            <Dependent Role="ProjectStages">
+              <PropertyRef Name="idStatusStage" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Новости__Создано__48CFD27E">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="Новости" Type="Self.Новости" Multiplicity="*" />
+        <Association Name="FK_Users_UserPositions">
+          <End Role="UserPositions" Type="Self.UserPositions" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="UserPositions">
+              <PropertyRef Name="idPosition" />
             </Principal>
-            <Dependent Role="Новости">
-              <PropertyRef Name="СозданоПользователемID" />
+            <Dependent Role="Users">
+              <PropertyRef Name="idPosition" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ответстве__Польз__5BE2A6F2">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="ОтветственныеЗаДокумент" Type="Self.ОтветственныеЗаДокумент" Multiplicity="*" />
+        <Association Name="FK_Users_UserRoles">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="UserRoles">
+              <PropertyRef Name="idRole" />
             </Principal>
-            <Dependent Role="ОтветственныеЗаДокумент">
-              <PropertyRef Name="ПользовательID" />
+            <Dependent Role="Users">
+              <PropertyRef Name="idRole" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ответстве__Польз__778AC167">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="ОтветственныеЗаМероприятие" Type="Self.ОтветственныеЗаМероприятие" Multiplicity="*" />
+        <Association Name="FK_Users_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users1" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
             </Principal>
-            <Dependent Role="ОтветственныеЗаМероприятие">
-              <PropertyRef Name="ПользовательID" />
+            <Dependent Role="Users1">
+              <PropertyRef Name="idSwapper" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Подраздел__Помощ__4222D4EF">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
-          <End Role="Подразделения" Type="Self.Подразделения" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="Подразделения">
-              <PropertyRef Name="ПомощникРуководителя" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="EventMembers">
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
         </Association>
-        <Association Name="FK__Подраздел__Руков__412EB0B6">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
-          <End Role="Подразделения" Type="Self.Подразделения" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="Подразделения">
-              <PropertyRef Name="РуководительПодразделения" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="ProjectMembers">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
         </Association>
-        <Association Name="FK__Пользоват__Подра__3F466844">
-          <End Role="Подразделения" Type="Self.Подразделения" Multiplicity="0..1" />
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Подразделения">
-              <PropertyRef Name="ПодразделениеID" />
-            </Principal>
-            <Dependent Role="Пользователи">
-              <PropertyRef Name="ПодразделениеID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Пользоват__Замен__403A8C7D">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
-          <End Role="Пользователи1" Type="Self.Пользователи" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="Пользователи1">
-              <PropertyRef Name="ЗаменяющийID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Пользоват__РольI__3E52440B">
-          <End Role="Роли" Type="Self.Роли" Multiplicity="1" />
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Роли">
-              <PropertyRef Name="РольID" />
-            </Principal>
-            <Dependent Role="Пользователи">
-              <PropertyRef Name="РольID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Проекты__Руковод__628FA481">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="Проекты" Type="Self.Проекты" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="Проекты">
-              <PropertyRef Name="РуководительПроектаID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__СобытияОт__Польз__44FF419A">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="СобытияОтсутствия" Type="Self.СобытияОтсутствия" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="СобытияОтсутствия">
-              <PropertyRef Name="ПользовательID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Согласующ__Польз__5FB337D6">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="СогласующиеДокумент" Type="Self.СогласующиеДокумент" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="СогласующиеДокумент">
-              <PropertyRef Name="ПользовательID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Участники__Польз__7B5B524B">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
-          <End Role="УчастникиМероприятия" Type="Self.УчастникиМероприятия" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Пользователи">
-              <PropertyRef Name="ПользовательID" />
-            </Principal>
-            <Dependent Role="УчастникиМероприятия">
-              <PropertyRef Name="ПользовательID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ЭтапыПрое__Проек__656C112C">
-          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
-          <End Role="ЭтапыПроектов" Type="Self.ЭтапыПроектов" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Проекты">
-              <PropertyRef Name="ПроектID" />
-            </Principal>
-            <Dependent Role="ЭтапыПроектов">
-              <PropertyRef Name="ПроектID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ЭтапыДоку__Текущ__5812160E">
-          <End Role="СтатусыДокументов" Type="Self.СтатусыДокументов" Multiplicity="1" />
-          <End Role="ЭтапыДокументов" Type="Self.ЭтапыДокументов" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="СтатусыДокументов">
-              <PropertyRef Name="СтатусДокументаID" />
-            </Principal>
-            <Dependent Role="ЭтапыДокументов">
-              <PropertyRef Name="ТекущийСтатусID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ПользователиПроекты">
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
-          <End Role="Проекты" Type="Self.Проекты" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="CorporatePortalEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="corporate_portalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Departments" />
+          <EntitySet Name="Events" EntityType="Self.Events" />
+          <EntitySet Name="EventStatuses" EntityType="Self.EventStatuses" />
+          <EntitySet Name="EventTypes" EntityType="Self.EventTypes" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" />
+          <EntitySet Name="ProjectStages" EntityType="Self.ProjectStages" />
+          <EntitySet Name="ProjectStateStatuses" EntityType="Self.ProjectStateStatuses" />
+          <EntitySet Name="ProjectStatuses" EntityType="Self.ProjectStatuses" />
+          <EntitySet Name="ProjectTypes" EntityType="Self.ProjectTypes" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Документы" EntityType="Self.Документы" />
-          <EntitySet Name="Мероприятия" EntityType="Self.Мероприятия" />
-          <EntitySet Name="Новости" EntityType="Self.Новости" />
-          <EntitySet Name="ОтветственныеЗаДокумент" EntityType="Self.ОтветственныеЗаДокумент" />
-          <EntitySet Name="ОтветственныеЗаМероприятие" EntityType="Self.ОтветственныеЗаМероприятие" />
-          <EntitySet Name="Подразделения" EntityType="Self.Подразделения" />
-          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
-          <EntitySet Name="Проекты" EntityType="Self.Проекты" />
-          <EntitySet Name="Роли" EntityType="Self.Роли" />
-          <EntitySet Name="СобытияОтсутствия" EntityType="Self.СобытияОтсутствия" />
-          <EntitySet Name="СогласующиеДокумент" EntityType="Self.СогласующиеДокумент" />
-          <EntitySet Name="СтатусыДокументов" EntityType="Self.СтатусыДокументов" />
-          <EntitySet Name="СтатусыМероприятий" EntityType="Self.СтатусыМероприятий" />
-          <EntitySet Name="ТипыДокументов" EntityType="Self.ТипыДокументов" />
-          <EntitySet Name="ТипыМероприятий" EntityType="Self.ТипыМероприятий" />
-          <EntitySet Name="УчастникиМероприятия" EntityType="Self.УчастникиМероприятия" />
-          <EntitySet Name="ЭтапыДокументов" EntityType="Self.ЭтапыДокументов" />
-          <EntitySet Name="ЭтапыПроектов" EntityType="Self.ЭтапыПроектов" />
-          <AssociationSet Name="FK__Документы__Созда__5441852A" Association="Self.FK__Документы__Созда__5441852A">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Документы" EntitySet="Документы" />
+          <EntitySet Name="UserPositions" EntityType="Self.UserPositions" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Departments_Departments" Association="Self.FK_Departments_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Departments1" EntitySet="Departments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Документы__Стату__534D60F1" Association="Self.FK__Документы__Стату__534D60F1">
-            <End Role="СтатусыДокументов" EntitySet="СтатусыДокументов" />
-            <End Role="Документы" EntitySet="Документы" />
+          <AssociationSet Name="FK_Projects_Departments" Association="Self.FK_Projects_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
-          <AssociationSet Name="FK__Документы__ТипДо__5165187F" Association="Self.FK__Документы__ТипДо__5165187F">
-            <End Role="ТипыДокументов" EntitySet="ТипыДокументов" />
-            <End Role="Документы" EntitySet="Документы" />
+          <AssociationSet Name="FK_Users_Departments" Association="Self.FK_Users_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ответстве__Докум__5AEE82B9" Association="Self.FK__Ответстве__Докум__5AEE82B9">
-            <End Role="Документы" EntitySet="Документы" />
-            <End Role="ОтветственныеЗаДокумент" EntitySet="ОтветственныеЗаДокумент" />
+          <AssociationSet Name="FK_Events_EventStatuses" Association="Self.FK_Events_EventStatuses">
+            <End Role="EventStatuses" EntitySet="EventStatuses" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
-          <AssociationSet Name="FK__Согласующ__Докум__5EBF139D" Association="Self.FK__Согласующ__Докум__5EBF139D">
-            <End Role="Документы" EntitySet="Документы" />
-            <End Role="СогласующиеДокумент" EntitySet="СогласующиеДокумент" />
+          <AssociationSet Name="FK_Events_EventTypes" Association="Self.FK_Events_EventTypes">
+            <End Role="EventTypes" EntitySet="EventTypes" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
-          <AssociationSet Name="FK__ЭтапыДоку__Докум__571DF1D5" Association="Self.FK__ЭтапыДоку__Докум__571DF1D5">
-            <End Role="Документы" EntitySet="Документы" />
-            <End Role="ЭтапыДокументов" EntitySet="ЭтапыДокументов" />
+          <AssociationSet Name="FK_Events_Users" Association="Self.FK_Events_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
-          <AssociationSet Name="FK__Мероприят__Иници__73BA3083" Association="Self.FK__Мероприят__Иници__73BA3083">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
+          <AssociationSet Name="FK_News_Users" Association="Self.FK_News_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="News" EntitySet="News" />
           </AssociationSet>
-          <AssociationSet Name="FK__Мероприят__Стату__72C60C4A" Association="Self.FK__Мероприят__Стату__72C60C4A">
-            <End Role="СтатусыМероприятий" EntitySet="СтатусыМероприятий" />
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
+          <AssociationSet Name="FK_Projects_ProjectStatuses" Association="Self.FK_Projects_ProjectStatuses">
+            <End Role="ProjectStatuses" EntitySet="ProjectStatuses" />
+            <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
-          <AssociationSet Name="FK__Мероприят__ТипМе__71D1E811" Association="Self.FK__Мероприят__ТипМе__71D1E811">
-            <End Role="ТипыМероприятий" EntitySet="ТипыМероприятий" />
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
+          <AssociationSet Name="FK_Projects_ProjectTypes" Association="Self.FK_Projects_ProjectTypes">
+            <End Role="ProjectTypes" EntitySet="ProjectTypes" />
+            <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ответстве__Мероп__76969D2E" Association="Self.FK__Ответстве__Мероп__76969D2E">
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
-            <End Role="ОтветственныеЗаМероприятие" EntitySet="ОтветственныеЗаМероприятие" />
+          <AssociationSet Name="FK_ProjectStages_Projects" Association="Self.FK_ProjectStages_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectStages" EntitySet="ProjectStages" />
           </AssociationSet>
-          <AssociationSet Name="FK__Участники__Мероп__7A672E12" Association="Self.FK__Участники__Мероп__7A672E12">
-            <End Role="Мероприятия" EntitySet="Мероприятия" />
-            <End Role="УчастникиМероприятия" EntitySet="УчастникиМероприятия" />
+          <AssociationSet Name="FK_ProjectStages_ProjectStateStatuses" Association="Self.FK_ProjectStages_ProjectStateStatuses">
+            <End Role="ProjectStateStatuses" EntitySet="ProjectStateStatuses" />
+            <End Role="ProjectStages" EntitySet="ProjectStages" />
           </AssociationSet>
-          <AssociationSet Name="FK__Новости__Создано__48CFD27E" Association="Self.FK__Новости__Создано__48CFD27E">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Новости" EntitySet="Новости" />
+          <AssociationSet Name="FK_Users_UserPositions" Association="Self.FK_Users_UserPositions">
+            <End Role="UserPositions" EntitySet="UserPositions" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ответстве__Польз__5BE2A6F2" Association="Self.FK__Ответстве__Польз__5BE2A6F2">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="ОтветственныеЗаДокумент" EntitySet="ОтветственныеЗаДокумент" />
+          <AssociationSet Name="FK_Users_UserRoles" Association="Self.FK_Users_UserRoles">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ответстве__Польз__778AC167" Association="Self.FK__Ответстве__Польз__778AC167">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="ОтветственныеЗаМероприятие" EntitySet="ОтветственныеЗаМероприятие" />
+          <AssociationSet Name="FK_Users_Users" Association="Self.FK_Users_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Подраздел__Помощ__4222D4EF" Association="Self.FK__Подраздел__Помощ__4222D4EF">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Подразделения" EntitySet="Подразделения" />
+          <AssociationSet Name="EventMembers" Association="Self.EventMembers">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Подраздел__Руков__412EB0B6" Association="Self.FK__Подраздел__Руков__412EB0B6">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Подразделения" EntitySet="Подразделения" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Подра__3F466844" Association="Self.FK__Пользоват__Подра__3F466844">
-            <End Role="Подразделения" EntitySet="Подразделения" />
-            <End Role="Пользователи" EntitySet="Пользователи" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Замен__403A8C7D" Association="Self.FK__Пользоват__Замен__403A8C7D">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Пользователи1" EntitySet="Пользователи" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__РольI__3E52440B" Association="Self.FK__Пользоват__РольI__3E52440B">
-            <End Role="Роли" EntitySet="Роли" />
-            <End Role="Пользователи" EntitySet="Пользователи" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Проекты__Руковод__628FA481" Association="Self.FK__Проекты__Руковод__628FA481">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Проекты" EntitySet="Проекты" />
-          </AssociationSet>
-          <AssociationSet Name="FK__СобытияОт__Польз__44FF419A" Association="Self.FK__СобытияОт__Польз__44FF419A">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="СобытияОтсутствия" EntitySet="СобытияОтсутствия" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Согласующ__Польз__5FB337D6" Association="Self.FK__Согласующ__Польз__5FB337D6">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="СогласующиеДокумент" EntitySet="СогласующиеДокумент" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Участники__Польз__7B5B524B" Association="Self.FK__Участники__Польз__7B5B524B">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="УчастникиМероприятия" EntitySet="УчастникиМероприятия" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ЭтапыПрое__Проек__656C112C" Association="Self.FK__ЭтапыПрое__Проек__656C112C">
-            <End Role="Проекты" EntitySet="Проекты" />
-            <End Role="ЭтапыПроектов" EntitySet="ЭтапыПроектов" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ЭтапыДоку__Текущ__5812160E" Association="Self.FK__ЭтапыДоку__Текущ__5812160E">
-            <End Role="СтатусыДокументов" EntitySet="СтатусыДокументов" />
-            <End Role="ЭтапыДокументов" EntitySet="ЭтапыДокументов" />
-          </AssociationSet>
-          <AssociationSet Name="ПользователиПроекты" Association="Self.ПользователиПроекты">
-            <End Role="Пользователи" EntitySet="Пользователи" />
-            <End Role="Проекты" EntitySet="Проекты" />
+          <AssociationSet Name="ProjectMembers" Association="Self.ProjectMembers">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1342,9 +899,112 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище testsetsModelContainer" CdmEntityContainer="CorporatePortalEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище corporate_portalModelContainer" CdmEntityContainer="corporate_portalEntities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="corporate_portalModel.Departments">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="idDepartrment" ColumnName="idDepartrment" />
+                <ScalarProperty Name="nameDepartment" ColumnName="nameDepartment" />
+                <ScalarProperty Name="idDirectorDepartment" ColumnName="idDirectorDepartment" />
+                <ScalarProperty Name="idSupportDirectorDepartment" ColumnName="idSupportDirectorDepartment" />
+                <ScalarProperty Name="idParentDepartment" ColumnName="idParentDepartment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="corporate_portalModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="idEvent" ColumnName="idEvent" />
+                <ScalarProperty Name="nameEvent" ColumnName="nameEvent" />
+                <ScalarProperty Name="idTypeEvent" ColumnName="idTypeEvent" />
+                <ScalarProperty Name="idStatusEvent" ColumnName="idStatusEvent" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="descriptionEvent" ColumnName="descriptionEvent" />
+                <ScalarProperty Name="idInitiator" ColumnName="idInitiator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventStatuses">
+            <EntityTypeMapping TypeName="corporate_portalModel.EventStatuses">
+              <MappingFragment StoreEntitySet="EventStatuses">
+                <ScalarProperty Name="idStatusEvent" ColumnName="idStatusEvent" />
+                <ScalarProperty Name="nameStatus" ColumnName="nameStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventTypes">
+            <EntityTypeMapping TypeName="corporate_portalModel.EventTypes">
+              <MappingFragment StoreEntitySet="EventTypes">
+                <ScalarProperty Name="idTypeEvent" ColumnName="idTypeEvent" />
+                <ScalarProperty Name="nameType" ColumnName="nameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="corporate_portalModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="idNew" ColumnName="idNew" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="idCreator" ColumnName="idCreator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="corporate_portalModel.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="idProject" ColumnName="idProject" />
+                <ScalarProperty Name="nameProject" ColumnName="nameProject" />
+                <ScalarProperty Name="descriptoinProject" ColumnName="descriptoinProject" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="idDepartment" ColumnName="idDepartment" />
+                <ScalarProperty Name="idStatusProject" ColumnName="idStatusProject" />
+                <ScalarProperty Name="idTypeProject" ColumnName="idTypeProject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectStages">
+            <EntityTypeMapping TypeName="corporate_portalModel.ProjectStages">
+              <MappingFragment StoreEntitySet="ProjectStages">
+                <ScalarProperty Name="idStageProject" ColumnName="idStageProject" />
+                <ScalarProperty Name="idProject" ColumnName="idProject" />
+                <ScalarProperty Name="nameState" ColumnName="nameState" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="idStatusStage" ColumnName="idStatusStage" />
+                <ScalarProperty Name="descriptionStage" ColumnName="descriptionStage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectStateStatuses">
+            <EntityTypeMapping TypeName="corporate_portalModel.ProjectStateStatuses">
+              <MappingFragment StoreEntitySet="ProjectStateStatuses">
+                <ScalarProperty Name="idStatusStage" ColumnName="idStatusStage" />
+                <ScalarProperty Name="nameStatus" ColumnName="nameStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectStatuses">
+            <EntityTypeMapping TypeName="corporate_portalModel.ProjectStatuses">
+              <MappingFragment StoreEntitySet="ProjectStatuses">
+                <ScalarProperty Name="idStatusProject" ColumnName="idStatusProject" />
+                <ScalarProperty Name="nameStatus" ColumnName="nameStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTypes">
+            <EntityTypeMapping TypeName="corporate_portalModel.ProjectTypes">
+              <MappingFragment StoreEntitySet="ProjectTypes">
+                <ScalarProperty Name="idTypeProject" ColumnName="idTypeProject" />
+                <ScalarProperty Name="nameType" ColumnName="nameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="testsetsModel.sysdiagrams">
+            <EntityTypeMapping TypeName="corporate_portalModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1354,212 +1014,57 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Документы">
-            <EntityTypeMapping TypeName="testsetsModel.Документы">
-              <MappingFragment StoreEntitySet="Документы">
-                <ScalarProperty Name="ДокументID" ColumnName="ДокументID" />
-                <ScalarProperty Name="НазваниеДокумента" ColumnName="НазваниеДокумента" />
-                <ScalarProperty Name="ТипДокументаID" ColumnName="ТипДокументаID" />
-                <ScalarProperty Name="Категория" ColumnName="Категория" />
-                <ScalarProperty Name="ДатаСоздания" ColumnName="ДатаСоздания" />
-                <ScalarProperty Name="Описание" ColumnName="Описание" />
-                <ScalarProperty Name="СтатусДокументаID" ColumnName="СтатусДокументаID" />
-                <ScalarProperty Name="Содержание" ColumnName="Содержание" />
-                <ScalarProperty Name="СозданоПользователемID" ColumnName="СозданоПользователемID" />
+          <EntitySetMapping Name="UserPositions">
+            <EntityTypeMapping TypeName="corporate_portalModel.UserPositions">
+              <MappingFragment StoreEntitySet="UserPositions">
+                <ScalarProperty Name="idPosition" ColumnName="idPosition" />
+                <ScalarProperty Name="namePosition" ColumnName="namePosition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Мероприятия">
-            <EntityTypeMapping TypeName="testsetsModel.Мероприятия">
-              <MappingFragment StoreEntitySet="Мероприятия">
-                <ScalarProperty Name="МероприятиеID" ColumnName="МероприятиеID" />
-                <ScalarProperty Name="НазваниеМероприятия" ColumnName="НазваниеМероприятия" />
-                <ScalarProperty Name="ТипМероприятияID" ColumnName="ТипМероприятияID" />
-                <ScalarProperty Name="СтатусМероприятияID" ColumnName="СтатусМероприятияID" />
-                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
-                <ScalarProperty Name="ДатаОкончания" ColumnName="ДатаОкончания" />
-                <ScalarProperty Name="КраткоеОписание" ColumnName="КраткоеОписание" />
-                <ScalarProperty Name="ИнициаторID" ColumnName="ИнициаторID" />
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="corporate_portalModel.UserRoles">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="nameRole" ColumnName="nameRole" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Новости">
-            <EntityTypeMapping TypeName="testsetsModel.Новости">
-              <MappingFragment StoreEntitySet="Новости">
-                <ScalarProperty Name="НовостьID" ColumnName="НовостьID" />
-                <ScalarProperty Name="Заголовок" ColumnName="Заголовок" />
-                <ScalarProperty Name="Содержание" ColumnName="Содержание" />
-                <ScalarProperty Name="ДатаСоздания" ColumnName="ДатаСоздания" />
-                <ScalarProperty Name="СозданоПользователемID" ColumnName="СозданоПользователемID" />
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="corporate_portalModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="secondName" ColumnName="secondName" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="idDepartment" ColumnName="idDepartment" />
+                <ScalarProperty Name="idPosition" ColumnName="idPosition" />
+                <ScalarProperty Name="workNumber" ColumnName="workNumber" />
+                <ScalarProperty Name="homeNumber" ColumnName="homeNumber" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="photoPath" ColumnName="photoPath" />
+                <ScalarProperty Name="idSwapper" ColumnName="idSwapper" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ОтветственныеЗаДокумент">
-            <EntityTypeMapping TypeName="testsetsModel.ОтветственныеЗаДокумент">
-              <MappingFragment StoreEntitySet="ОтветственныеЗаДокумент">
-                <ScalarProperty Name="ОтветственныйID" ColumnName="ОтветственныйID" />
-                <ScalarProperty Name="ДокументID" ColumnName="ДокументID" />
-                <ScalarProperty Name="ПользовательID" ColumnName="ПользовательID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ОтветственныеЗаМероприятие">
-            <EntityTypeMapping TypeName="testsetsModel.ОтветственныеЗаМероприятие">
-              <MappingFragment StoreEntitySet="ОтветственныеЗаМероприятие">
-                <ScalarProperty Name="ОтветственныйID" ColumnName="ОтветственныйID" />
-                <ScalarProperty Name="МероприятиеID" ColumnName="МероприятиеID" />
-                <ScalarProperty Name="ПользовательID" ColumnName="ПользовательID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Подразделения">
-            <EntityTypeMapping TypeName="testsetsModel.Подразделения">
-              <MappingFragment StoreEntitySet="Подразделения">
-                <ScalarProperty Name="ПодразделениеID" ColumnName="ПодразделениеID" />
-                <ScalarProperty Name="НазваниеПодразделения" ColumnName="НазваниеПодразделения" />
-                <ScalarProperty Name="РуководительПодразделения" ColumnName="РуководительПодразделения" />
-                <ScalarProperty Name="ПомощникРуководителя" ColumnName="ПомощникРуководителя" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Пользователи">
-            <EntityTypeMapping TypeName="testsetsModel.Пользователи">
-              <MappingFragment StoreEntitySet="Пользователи">
-                <ScalarProperty Name="ПользовательID" ColumnName="ПользовательID" />
-                <ScalarProperty Name="Логин" ColumnName="Логин" />
-                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
-                <ScalarProperty Name="Имя" ColumnName="Имя" />
-                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
-                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
-                <ScalarProperty Name="ЭлПочта" ColumnName="ЭлПочта" />
-                <ScalarProperty Name="РольID" ColumnName="РольID" />
-                <ScalarProperty Name="ПодразделениеID" ColumnName="ПодразделениеID" />
-                <ScalarProperty Name="Должность" ColumnName="Должность" />
-                <ScalarProperty Name="РабочийТелефон" ColumnName="РабочийТелефон" />
-                <ScalarProperty Name="ДомашнийТелефон" ColumnName="ДомашнийТелефон" />
-                <ScalarProperty Name="ДатаРождения" ColumnName="ДатаРождения" />
-                <ScalarProperty Name="РуководительID" ColumnName="РуководительID" />
-                <ScalarProperty Name="ЗаменяющийID" ColumnName="ЗаменяющийID" />
-                <ScalarProperty Name="ПутьКФото" ColumnName="ПутьКФото" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Проекты">
-            <EntityTypeMapping TypeName="testsetsModel.Проекты">
-              <MappingFragment StoreEntitySet="Проекты">
-                <ScalarProperty Name="ПроектID" ColumnName="ПроектID" />
-                <ScalarProperty Name="НазваниеПроекта" ColumnName="НазваниеПроекта" />
-                <ScalarProperty Name="ОписаниеПроекта" ColumnName="ОписаниеПроекта" />
-                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
-                <ScalarProperty Name="ДатаОкончания" ColumnName="ДатаОкончания" />
-                <ScalarProperty Name="РуководительПроектаID" ColumnName="РуководительПроектаID" />
-                <ScalarProperty Name="Статус" ColumnName="Статус" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Роли">
-            <EntityTypeMapping TypeName="testsetsModel.Роли">
-              <MappingFragment StoreEntitySet="Роли">
-                <ScalarProperty Name="РольID" ColumnName="РольID" />
-                <ScalarProperty Name="НазваниеРоли" ColumnName="НазваниеРоли" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="СобытияОтсутствия">
-            <EntityTypeMapping TypeName="testsetsModel.СобытияОтсутствия">
-              <MappingFragment StoreEntitySet="СобытияОтсутствия">
-                <ScalarProperty Name="СобытиеID" ColumnName="СобытиеID" />
-                <ScalarProperty Name="ПользовательID" ColumnName="ПользовательID" />
-                <ScalarProperty Name="ТипСобытия" ColumnName="ТипСобытия" />
-                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
-                <ScalarProperty Name="ДатаОкончания" ColumnName="ДатаОкончания" />
-                <ScalarProperty Name="Описание" ColumnName="Описание" />
-                <ScalarProperty Name="Место" ColumnName="Место" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="СогласующиеДокумент">
-            <EntityTypeMapping TypeName="testsetsModel.СогласующиеДокумент">
-              <MappingFragment StoreEntitySet="СогласующиеДокумент">
-                <ScalarProperty Name="СогласующийID" ColumnName="СогласующийID" />
-                <ScalarProperty Name="ДокументID" ColumnName="ДокументID" />
-                <ScalarProperty Name="ПользовательID" ColumnName="ПользовательID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="СтатусыДокументов">
-            <EntityTypeMapping TypeName="testsetsModel.СтатусыДокументов">
-              <MappingFragment StoreEntitySet="СтатусыДокументов">
-                <ScalarProperty Name="СтатусДокументаID" ColumnName="СтатусДокументаID" />
-                <ScalarProperty Name="НазваниеСтатуса" ColumnName="НазваниеСтатуса" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="СтатусыМероприятий">
-            <EntityTypeMapping TypeName="testsetsModel.СтатусыМероприятий">
-              <MappingFragment StoreEntitySet="СтатусыМероприятий">
-                <ScalarProperty Name="СтатусМероприятияID" ColumnName="СтатусМероприятияID" />
-                <ScalarProperty Name="НазваниеСтатуса" ColumnName="НазваниеСтатуса" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ТипыДокументов">
-            <EntityTypeMapping TypeName="testsetsModel.ТипыДокументов">
-              <MappingFragment StoreEntitySet="ТипыДокументов">
-                <ScalarProperty Name="ТипДокументаID" ColumnName="ТипДокументаID" />
-                <ScalarProperty Name="НазваниеТипа" ColumnName="НазваниеТипа" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ТипыМероприятий">
-            <EntityTypeMapping TypeName="testsetsModel.ТипыМероприятий">
-              <MappingFragment StoreEntitySet="ТипыМероприятий">
-                <ScalarProperty Name="ТипМероприятияID" ColumnName="ТипМероприятияID" />
-                <ScalarProperty Name="НазваниеТипа" ColumnName="НазваниеТипа" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="УчастникиМероприятия">
-            <EntityTypeMapping TypeName="testsetsModel.УчастникиМероприятия">
-              <MappingFragment StoreEntitySet="УчастникиМероприятия">
-                <ScalarProperty Name="УчастникID" ColumnName="УчастникID" />
-                <ScalarProperty Name="МероприятиеID" ColumnName="МероприятиеID" />
-                <ScalarProperty Name="ПользовательID" ColumnName="ПользовательID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ЭтапыДокументов">
-            <EntityTypeMapping TypeName="testsetsModel.ЭтапыДокументов">
-              <MappingFragment StoreEntitySet="ЭтапыДокументов">
-                <ScalarProperty Name="ЭтапID" ColumnName="ЭтапID" />
-                <ScalarProperty Name="ДокументID" ColumnName="ДокументID" />
-                <ScalarProperty Name="НазваниеЭтапа" ColumnName="НазваниеЭтапа" />
-                <ScalarProperty Name="ДатаНачалаЭтапа" ColumnName="ДатаНачалаЭтапа" />
-                <ScalarProperty Name="ДатаОкончанияЭтапа" ColumnName="ДатаОкончанияЭтапа" />
-                <ScalarProperty Name="ТекущийСтатусID" ColumnName="ТекущийСтатусID" />
-                <ScalarProperty Name="ОписаниеЭтапа" ColumnName="ОписаниеЭтапа" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ЭтапыПроектов">
-            <EntityTypeMapping TypeName="testsetsModel.ЭтапыПроектов">
-              <MappingFragment StoreEntitySet="ЭтапыПроектов">
-                <ScalarProperty Name="ЭтапID" ColumnName="ЭтапID" />
-                <ScalarProperty Name="ПроектID" ColumnName="ПроектID" />
-                <ScalarProperty Name="НазваниеЭтапа" ColumnName="НазваниеЭтапа" />
-                <ScalarProperty Name="ДатаНачалаЭтапа" ColumnName="ДатаНачалаЭтапа" />
-                <ScalarProperty Name="ДатаОкончанияЭтапа" ColumnName="ДатаОкончанияЭтапа" />
-                <ScalarProperty Name="ТекущийСтатус" ColumnName="ТекущийСтатус" />
-                <ScalarProperty Name="ОписаниеЭтапа" ColumnName="ОписаниеЭтапа" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="ПользователиПроекты" TypeName="testsetsModel.ПользователиПроекты" StoreEntitySet="ПользователиПроекты">
-            <EndProperty Name="Пользователи">
-              <ScalarProperty Name="ПользовательID" ColumnName="ПользовательID" />
+          <AssociationSetMapping Name="EventMembers" TypeName="corporate_portalModel.EventMembers" StoreEntitySet="EventMembers">
+            <EndProperty Name="Events">
+              <ScalarProperty Name="idEvent" ColumnName="idEvent" />
             </EndProperty>
-            <EndProperty Name="Проекты">
-              <ScalarProperty Name="ПроектID" ColumnName="ПроектID" />
+            <EndProperty Name="Users">
+              <ScalarProperty Name="idUser" ColumnName="idUser" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProjectMembers" TypeName="corporate_portalModel.ProjectMembers" StoreEntitySet="ProjectMembers">
+            <EndProperty Name="Projects">
+              <ScalarProperty Name="idProject" ColumnName="idProject" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="idUser" ColumnName="idUser" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

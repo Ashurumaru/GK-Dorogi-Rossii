@@ -12,22 +12,27 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Подразделения
+    public partial class Events
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Подразделения()
+        public Events()
         {
-            this.Пользователи2 = new HashSet<Пользователи>();
+            this.Users1 = new HashSet<Users>();
         }
     
-        public int ПодразделениеID { get; set; }
-        public string НазваниеПодразделения { get; set; }
-        public Nullable<int> РуководительПодразделения { get; set; }
-        public Nullable<int> ПомощникРуководителя { get; set; }
+        public int idEvent { get; set; }
+        public string nameEvent { get; set; }
+        public Nullable<int> idTypeEvent { get; set; }
+        public Nullable<int> idStatusEvent { get; set; }
+        public Nullable<System.DateTime> startDate { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
+        public string descriptionEvent { get; set; }
+        public Nullable<int> idInitiator { get; set; }
     
-        public virtual Пользователи Пользователи { get; set; }
-        public virtual Пользователи Пользователи1 { get; set; }
+        public virtual EventStatuses EventStatuses { get; set; }
+        public virtual EventTypes EventTypes { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Пользователи> Пользователи2 { get; set; }
+        public virtual ICollection<Users> Users1 { get; set; }
     }
 }

@@ -12,16 +12,18 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ЭтапыПроектов
+    public partial class EventStatuses
     {
-        public int ЭтапID { get; set; }
-        public int ПроектID { get; set; }
-        public string НазваниеЭтапа { get; set; }
-        public System.DateTime ДатаНачалаЭтапа { get; set; }
-        public Nullable<System.DateTime> ДатаОкончанияЭтапа { get; set; }
-        public string ТекущийСтатус { get; set; }
-        public string ОписаниеЭтапа { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EventStatuses()
+        {
+            this.Events = new HashSet<Events>();
+        }
     
-        public virtual Проекты Проекты { get; set; }
+        public int idStatusEvent { get; set; }
+        public string nameStatus { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Events> Events { get; set; }
     }
 }

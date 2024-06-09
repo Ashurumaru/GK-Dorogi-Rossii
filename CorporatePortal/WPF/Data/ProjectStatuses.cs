@@ -12,13 +12,18 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class СогласующиеДокумент
+    public partial class ProjectStatuses
     {
-        public int СогласующийID { get; set; }
-        public int ДокументID { get; set; }
-        public int ПользовательID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProjectStatuses()
+        {
+            this.Projects = new HashSet<Projects>();
+        }
     
-        public virtual Документы Документы { get; set; }
-        public virtual Пользователи Пользователи { get; set; }
+        public int idStatusProject { get; set; }
+        public string nameStatus { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Projects> Projects { get; set; }
     }
 }

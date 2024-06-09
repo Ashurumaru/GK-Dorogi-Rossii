@@ -12,18 +12,14 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Роли
+    public partial class News
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Роли()
-        {
-            this.Пользователи = new HashSet<Пользователи>();
-        }
+        public int idNew { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public Nullable<System.DateTime> createDate { get; set; }
+        public Nullable<int> idCreator { get; set; }
     
-        public int РольID { get; set; }
-        public string НазваниеРоли { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Пользователи> Пользователи { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

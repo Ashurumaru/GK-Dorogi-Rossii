@@ -12,16 +12,18 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class СобытияОтсутствия
+    public partial class UserPositions
     {
-        public int СобытиеID { get; set; }
-        public int ПользовательID { get; set; }
-        public string ТипСобытия { get; set; }
-        public System.DateTime ДатаНачала { get; set; }
-        public Nullable<System.DateTime> ДатаОкончания { get; set; }
-        public string Описание { get; set; }
-        public string Место { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UserPositions()
+        {
+            this.Users = new HashSet<Users>();
+        }
     
-        public virtual Пользователи Пользователи { get; set; }
+        public int idPosition { get; set; }
+        public string namePosition { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

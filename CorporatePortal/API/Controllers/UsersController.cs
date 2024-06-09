@@ -1,12 +1,12 @@
-﻿using API.Data;
-using API.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using API.Data;
+using API.Models;
 
 namespace API.Controllers
 {
@@ -25,14 +25,17 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Пользователи.ToListAsync();
+            var users = await _context.Users.ToListAsync();
+            if (users == null || users.Count == 0)
+                return NotFound();
+            return users;
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Пользователи.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
 
             if (user == null)
             {
@@ -43,10 +46,11 @@ namespace API.Controllers
         }
 
         // PUT: api/Users/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.ПользовательID)
+            if (id != user.idUser)
             {
                 return BadRequest();
             }
@@ -73,48 +77,27 @@ namespace API.Controllers
         }
 
         // POST: api/Users
-        [HttpPost]
-        // POST: api/Users
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            if (user.РольID != 0 && !_context.Роли.Any(r => r.РольID == user.РольID))
-            {
-                return BadRequest("Invalid RoleID");
-            }
-
-            if (user.ПодразделениеID != null && user.ПодразделениеID != 0 && !_context.Подразделения.Any(d => d.ПодразделениеID == user.ПодразделениеID))
-            {
-                return BadRequest("Invalid ПодразделениеID");
-            }
-
-            if (user.РуководительID != null && user.РуководительID != 0 && !_context.Пользователи.Any(u => u.ПользовательID == user.РуководительID))
-            {
-                return BadRequest("Invalid РуководительID");
-            }
-
-            if (user.ЗаменяющийID != null && user.ЗаменяющийID != 0 && !_context.Пользователи.Any(u => u.ПользовательID == user.ЗаменяющийID))
-            {
-                return BadRequest("Invalid ЗаменяющийID");
-            }
-
-            _context.Пользователи.Add(user);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.ПользовательID }, user);
+            return CreatedAtAction("GetUser", new { id = user.idUser }, user);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _context.Пользователи.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Пользователи.Remove(user);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -122,7 +105,7 @@ namespace API.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Пользователи.Any(e => e.ПользовательID == id);
+            return _context.Users.Any(e => e.idUser == id);
         }
     }
 }

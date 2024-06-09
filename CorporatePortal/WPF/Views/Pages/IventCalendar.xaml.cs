@@ -26,77 +26,77 @@ namespace WPF.Views.Pages
 
         private void LoadEvents()
         {
-            using (var context = new CorporatePortalEntities())
-            {
-                _departments = context.Подразделения.Select(p => new Department
-                {
-                    НазваниеПодразделения = p.НазваниеПодразделения,
-                    ПодразделениеID = p.ПодразделениеID
-                }).ToList();
+            //using (var context = new CorporatePortalEntities())
+            //{
+            //    _departments = context.Подразделения.Select(p => new Department
+            //    {
+            //        НазваниеПодразделения = p.НазваниеПодразделения,
+            //        ПодразделениеID = p.ПодразделениеID
+            //    }).ToList();
 
-                _allEvents = context.Мероприятия.Select(e => new Event
-                {
-                    ТипМероприятия = e.ТипыМероприятий.НазваниеТипа,
-                    ДатаНачала = e.ДатаНачала,
-                    ДатаОкончания = e.ДатаОкончания,
-                    Инициатор = e.Пользователи.Логин,
-                    КраткоеОписание = e.КраткоеОписание,
-                    МероприятиеID = e.МероприятиеID,
-                    НазваниеМероприятия = e.НазваниеМероприятия,
-                    СтатусМероприятия = e.СтатусыМероприятий.НазваниеСтатуса
-                }).ToList();
+            //    _allEvents = context.Мероприятия.Select(e => new Event
+            //    {
+            //        ТипМероприятия = e.ТипыМероприятий.НазваниеТипа,
+            //        ДатаНачала = e.ДатаНачала,
+            //        ДатаОкончания = e.ДатаОкончания,
+            //        Инициатор = e.Пользователи.Логин,
+            //        КраткоеОписание = e.КраткоеОписание,
+            //        МероприятиеID = e.МероприятиеID,
+            //        НазваниеМероприятия = e.НазваниеМероприятия,
+            //        СтатусМероприятия = e.СтатусыМероприятий.НазваниеСтатуса
+            //    }).ToList();
 
-                var companyTree = new TreeViewItem { Header = "CorporatePortal" };
-                foreach (var item in _departments)
-                {
-                    var departmentTree = new TreeViewItem
-                    {
-                        Header = item.НазваниеПодразделения,
-                        DataContext = item
-                    };
+            //    var companyTree = new TreeViewItem { Header = "CorporatePortal" };
+            //    foreach (var item in _departments)
+            //    {
+            //        var departmentTree = new TreeViewItem
+            //        {
+            //            Header = item.НазваниеПодразделения,
+            //            DataContext = item
+            //        };
 
-                    companyTree.Items.Add(departmentTree);
-                }
-                DepartamentCompany.Items.Add(companyTree);
-            }
+            //        companyTree.Items.Add(departmentTree);
+            //    }
+            //    DepartamentCompany.Items.Add(companyTree);
+            //}
         }
         private void DepartamentCompany_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (DepartamentCompany.SelectedItem is TreeViewItem selectedItem && selectedItem.DataContext is Department selectedDepartment)
-            {
-                int departmentId = selectedDepartment.ПодразделениеID;
+            //if (DepartamentCompany.SelectedItem is TreeViewItem selectedItem && selectedItem.DataContext is Department selectedDepartment)
+            //{
+            //    int departmentId = selectedDepartment.ПодразделениеID;
 
-                using (var context = new CorporatePortalEntities())
-                {
-                    {
-                        var departmentParticipantEventIds = context.УчастникиМероприятия
-                            .Where(p => p.Пользователи.ПодразделениеID == departmentId)
-                            .Select(p => p.МероприятиеID)
-                            .Distinct()
-                            .ToList();
+            //    using (var context = new CorporatePortalEntities())
+            //    {
+            //        {
+            //            var departmentParticipantEventIds = context.УчастникиМероприятия
+            //                .Where(p => p.Пользователи.ПодразделениеID == departmentId)
+            //                .Select(p => p.МероприятиеID)
+            //                .Distinct()
+            //                .ToList();
 
-                        var eventsInDepartment = _allEvents
-                            .Where(ev => departmentParticipantEventIds
-                            .Contains(ev.МероприятиеID))
-                            .ToList();
+            //            var eventsInDepartment = _allEvents
+            //                .Where(ev => departmentParticipantEventIds
+            //                .Contains(ev.МероприятиеID))
+            //                .ToList();
 
-                        _selectedDepartmentEvents = eventsInDepartment;
-                    }
+            //            _selectedDepartmentEvents = eventsInDepartment;
+            //        }
 
-                    DatagridEvents.ItemsSource = null;
-                    ClearEventDetails();
-                }
-            }
+            //        DatagridEvents.ItemsSource = null;
+            //        ClearEventDetails();
+            //    }
+            //}
         }
 
         private void EventCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-                var selectedDate = eventCalendar.SelectedDate.Value;
-                var selectedEvents = _selectedDepartmentEvents
-                .Where(ev => ev.ДатаНачала.Date <= selectedDate.Date && ev.ДатаОкончания.Date >= selectedDate.Date)
-                .ToList();
-                DatagridEvents.ItemsSource = selectedEvents;
-                ClearEventDetails();
+                //var selectedDate = eventCalendar.SelectedDate.Value;
+                //var selectedEvents = _selectedDepartmentEvents
+                //.Where(ev => ev.ДатаНачала.Date <= selectedDate.Date && ev.ДатаОкончания.Date >= selectedDate.Date)
+                //.ToList();
+                //DatagridEvents.ItemsSource = selectedEvents;
+                //ClearEventDetails();
         }
 
         private void ClearEventDetails()
@@ -119,28 +119,28 @@ namespace WPF.Views.Pages
 
         private void DatagridEvents_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DatagridEvents.SelectedItem is Event selectedEvent)
-            {
-                eventName.Text = selectedEvent.НазваниеМероприятия;
-                eventType.Text = selectedEvent.ТипМероприятия;
-                eventStatus.Text = selectedEvent.СтатусМероприятия;
-                eventDateTime.Text = $"{selectedEvent.ДатаНачала} - {selectedEvent.ДатаОкончания}";
-                eventResponsible.Text = selectedEvent.Инициатор;
-                eventDescription.Text = selectedEvent.КраткоеОписание;
+            //if (DatagridEvents.SelectedItem is Event selectedEvent)
+            //{
+            //    eventName.Text = selectedEvent.НазваниеМероприятия;
+            //    eventType.Text = selectedEvent.ТипМероприятия;
+            //    eventStatus.Text = selectedEvent.СтатусМероприятия;
+            //    eventDateTime.Text = $"{selectedEvent.ДатаНачала} - {selectedEvent.ДатаОкончания}";
+            //    eventResponsible.Text = selectedEvent.Инициатор;
+            //    eventDescription.Text = selectedEvent.КраткоеОписание;
 
-                using (var context = new CorporatePortalEntities())
-                {
-                    _participants = context.УчастникиМероприятия
-                        .Where(p => p.МероприятиеID == selectedEvent.МероприятиеID)
-                        .Select(p => new User
-                        {
-                            Имя = p.Пользователи.Имя,
-                            Фамилия = p.Пользователи.Фамилия
-                        }).ToList();
+            //    using (var context = new CorporatePortalEntities())
+            //    {
+            //        _participants = context.УчастникиМероприятия
+            //            .Where(p => p.МероприятиеID == selectedEvent.МероприятиеID)
+            //            .Select(p => new User
+            //            {
+            //                Имя = p.Пользователи.Имя,
+            //                Фамилия = p.Пользователи.Фамилия
+            //            }).ToList();
 
-                    participantDataGrid.ItemsSource = _participants;
-                }
-            }
+            //        participantDataGrid.ItemsSource = _participants;
+            //    }
+            //}
         }
     }
 }

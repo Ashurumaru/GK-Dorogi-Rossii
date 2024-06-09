@@ -29,6 +29,10 @@ namespace CorporatePortal.WPF.Views
     {
         private User _currentUser;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currentUser"></param>
         public DashboardView(User currentUser)
         {
             InitializeComponent();
@@ -36,14 +40,10 @@ namespace CorporatePortal.WPF.Views
             MessageBox.Show(_currentUser.ToString());
         }
 
-        private void NavigateToUsers(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new ControlEmployees());
-        }
 
-        private void NavigateToIventsCalendar(object sender, RoutedEventArgs e)
+        private void BtnEmployeePortal_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new IventCalendar());
+            MainFrame.Navigate(new EmployeePortal());
         }
     }
 }

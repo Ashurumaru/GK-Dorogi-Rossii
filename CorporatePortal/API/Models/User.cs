@@ -1,23 +1,25 @@
-﻿namespace API.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API.Models
 {
     public class User
     {
-        public int ПользовательID { get; set; }
-        public string Логин { get; set; }
-        public string Пароль { get; set; }
-        public string Имя { get; set; }
-        public string Фамилия { get; set; }
-        public string Отчество { get; set; }
-        public string ЭлПочта { get; set; }
-        public int РольID { get; set; }
-        public int? ПодразделениеID { get; set; } 
-        public string Должность { get; set; }
-        public string РабочийТелефон { get; set; }
-        public string ДомашнийТелефон { get; set; }
-        public DateTime? ДатаРождения { get; set; } 
-        public int? РуководительID { get; set; }
-        public string? ПутьКФото { get; set; }
-        public int? ЗаменяющийID { get; set; } 
+        [Key]
+        public int idUser { get; set; }
+        public string login { get; set; }
+        public string password { get; set; }
+        public string firstName { get; set; }
+        public string secondName { get; set; }
+        public string patronymic { get; set; }
+        public string Email { get; set; }
+        public Nullable<int> idRole { get; set; }
+        public Nullable<int> idDepartment { get; set; }
+        public Nullable<int> idPosition { get; set; }
+        public string workNumber { get; set; }
+        public string homeNumber { get; set; }
+        public Nullable<System.DateTime> birthDay { get; set; }
+        public string photoPath { get; set; }
+        public Nullable<int> idSwapper { get; set; }
     }
 
 }

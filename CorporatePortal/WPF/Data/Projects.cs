@@ -12,21 +12,30 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class СтатусыДокументов
+    public partial class Projects
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public СтатусыДокументов()
+        public Projects()
         {
-            this.Документы = new HashSet<Документы>();
-            this.ЭтапыДокументов = new HashSet<ЭтапыДокументов>();
+            this.ProjectStages = new HashSet<ProjectStages>();
+            this.Users = new HashSet<Users>();
         }
     
-        public int СтатусДокументаID { get; set; }
-        public string НазваниеСтатуса { get; set; }
+        public int idProject { get; set; }
+        public string nameProject { get; set; }
+        public string descriptoinProject { get; set; }
+        public Nullable<System.DateTime> startDate { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
+        public Nullable<int> idDepartment { get; set; }
+        public Nullable<int> idStatusProject { get; set; }
+        public Nullable<int> idTypeProject { get; set; }
     
+        public virtual Departments Departments { get; set; }
+        public virtual ProjectStatuses ProjectStatuses { get; set; }
+        public virtual ProjectTypes ProjectTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Документы> Документы { get; set; }
+        public virtual ICollection<ProjectStages> ProjectStages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ЭтапыДокументов> ЭтапыДокументов { get; set; }
+        public virtual ICollection<Users> Users { get; set; }
     }
 }
