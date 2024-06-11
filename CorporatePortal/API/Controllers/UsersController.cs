@@ -47,12 +47,31 @@ namespace API.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
-            if (users == null || users.Count == 0)
-                return NotFound();
-            return users;
+            var users = await _context.Users
+                .Include(e => e.Department)
+                .Include(e => e.Position)
+                .Select(e => new UserDto
+                {
+                    IdUser = e.idUser,
+                    FirstName = e.firstName,
+                    SecondName = e.secondName,
+                    Patronymic = e.patronymic,
+                    WorkNumber = e.workNumber,
+                    BirthDay = e.birthDay,
+                    DepartmentName = e.Department.nameDepartment,
+                    IdSwapper = e.idSwapper,
+                    Email = e.Email,
+                    HomeNumber = e.homeNumber,
+                    IdDepartment = e.idDepartment,
+                    IdPosition = e.idPosition,
+                    PhotoPath = e.photoPath,
+                    PositionName = e.Position.namePosition,
+                })
+                .ToListAsync();
+
+            return Ok(users);
         }
 
         // GET: api/Users/5

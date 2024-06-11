@@ -8,21 +8,24 @@ namespace API.Models
     {
         [Key]
         public int idUser { get; set; }
-        public string firstName { get; set; }
-        public string secondName { get; set; }
-        public string patronymic { get; set; }
+        public string? firstName { get; set; }
+        public string? secondName { get; set; }
+        public string? patronymic { get; set; }
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         public int? idDepartment { get; set; }
         public int? idPosition { get; set; }
-        public string workNumber { get; set; }
-        public string homeNumber { get; set; }
-        public DateTime birthDay { get; set; }
-        public string photoPath { get; set; }
+        public string? workNumber { get; set; }
+        public string? homeNumber { get; set; }
+        public DateTime? birthDay { get; set; }
+        public string? photoPath { get; set; }
         public int? idSwapper { get; set; }
         [JsonIgnore]
+        [ForeignKey("idDepartrment")]
+        public Department Department { get; set; }
+        [ForeignKey("idPosition")]
+        public UserPosition Position { get; set; }
         public ICollection<UserAccount> UserAccounts { get; set; }
-
     }
 
 }

@@ -34,8 +34,8 @@ namespace WPF.Views.Pages
         private async void LoadEvents()
         {
 
-                var events = await _apiClient.GetEventsAsync();
-                EventItemsControl.ItemsSource = events;
+            var events = await _apiClient.GetEventsAsync();
+            EventItemsControl.ItemsSource = events;
 
         }
         private async void LoadEmployees()

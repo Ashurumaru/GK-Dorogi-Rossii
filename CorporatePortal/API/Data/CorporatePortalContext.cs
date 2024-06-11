@@ -16,18 +16,19 @@ namespace API.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<EventType> EventTypes { get; set; }
         public DbSet<EventStatus> EventStatuses { get; set; }
+        public DbSet<UserPosition> UserPositions { get; set; }
 
 
         //public DbSet<Role> Roles { get; set; }
-        //public DbSet<Department> Departments { get; set; }
+        public DbSet<Department> Departments { get; set; }
         //public DbSet<New> News { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<User>()
-            //    .HasOne(u => u.Department)
-            //    .WithMany()
-            //    .HasForeignKey(u => u.idDepartment)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Department)
+                .WithMany()
+                .HasForeignKey(u => u.idDepartment)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Department>()
                 .HasOne(d => d.Director)
@@ -51,6 +52,11 @@ namespace API.Data
                 .HasMany(u => u.UserAccounts)
                 .WithOne()
                 .HasForeignKey(ua => ua.idUser);
+
+            modelBuilder.Entity<User>()
+               .HasOne(u => u.Position)
+               .WithMany(p => p.Users)
+               .HasForeignKey(u => u.idPosition);
         }
     }
 

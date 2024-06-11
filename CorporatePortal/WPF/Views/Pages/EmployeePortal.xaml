@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <TextBlock Style="{DynamicResource StandartText}" Text="Сотрудники" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Height="120">
                 <ItemsControl x:Name="EmployeeItems">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -32,16 +32,15 @@
                             <Border BorderBrush="Gray" Background="{StaticResource ColorGreen}" BorderThickness="1" Margin="5" Padding="5" CornerRadius="5">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding firstName}" FontSize="14" FontWeight="Bold" Foreground="Black" Style="{DynamicResource StandartText}" TextWrapping="Wrap"/>
-                                        <TextBlock Text="{Binding secondName}" FontWeight="Bold"  Foreground="Black" Style="{DynamicResource StandartText}"/>
-                                        <TextBlock Text="{Binding patronymic}" FontWeight="Bold"  Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                        <TextBlock Text="{Binding SecondName}" FontWeight="Bold"  Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                        <TextBlock Text="{Binding Patronymic}" FontWeight="Bold"  Foreground="Black" Style="{DynamicResource StandartText}"/>
                                     </StackPanel>
-                                    <TextBlock Text="{Binding Email}" Foreground="Blue" Style="{DynamicResource StandartText}"/>
-                                    <TextBlock Text="{Binding workNumber}" Foreground="Black" Style="{DynamicResource StandartText}"/>
-                                    <TextBlock Text="{Binding homeNumber}" Foreground="Black" Style="{DynamicResource StandartText}"/>
-                                    <TextBlock Text="{Binding birthDay, StringFormat='День рождения: {0:dd.MM.yyyy}'}" Foreground="Black" Style="{DynamicResource StandartText}"/>
-                                    <TextBlock Text="{Binding Department}" Foreground="Black" Style="{DynamicResource StandartText}"/>
-                                    <TextBlock Text="{Binding Position}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding WorkNumber}" Foreground="Black" FontSize="10" Margin="0 0 0 0" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding BirthDay, StringFormat='День рождения: {0:dd.MM.yyyy}'}" Margin="0 0 0 0" Foreground="Black" FontSize="10" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding DepartmentName}" Foreground="Black" Style="{DynamicResource StandartText}" Margin="0 0 0 0" FontSize="10"/>
+                                    <TextBlock Text="{Binding PositionName}" Foreground="Black" Style="{DynamicResource StandartText}" Margin="0 0 0 0" FontSize="10" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding Email}" Foreground="Blue" Style="{DynamicResource StandartText}" Margin="0 0 0 0" FontSize="10" HorizontalAlignment="Right"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

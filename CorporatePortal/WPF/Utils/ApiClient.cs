@@ -19,15 +19,6 @@ namespace CorporatePortal.WPF.Utils
             _httpClient = new HttpClient { BaseAddress = new Uri(url) };
         }
 
-        public async Task<List<User>> GetUsersAsync()
-        {
-            var response = await _httpClient.GetAsync("api/users");
-            response.EnsureSuccessStatusCode();
-
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<User>>(content);
-        }
-
         public async Task<User> AuthorizeUserAsync(string username, string password)
         {
             var loginRequest = new LoginDto
@@ -85,16 +76,22 @@ namespace CorporatePortal.WPF.Utils
             var response = await _httpClient.DeleteAsync($"api/users/{id}");
             response.EnsureSuccessStatusCode();
         }
+        public async Task<List<UserDto>> GetUsersAsync()
+        {
+            var response = await _httpClient.GetAsync("api/users");
+            response.EnsureSuccessStatusCode();
 
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<UserDto>>(content);
+        }
         public async Task<List<EventDto>> GetEventsAsync()
         {
+            var response = await _httpClient.GetAsync("api/Events");
+            response.EnsureSuccessStatusCode();
 
-                var response = await _httpClient.GetAsync("api/Events");
-                response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<EventDto>>(content);
 
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<EventDto>>(content);
-            
         }
     }
 }

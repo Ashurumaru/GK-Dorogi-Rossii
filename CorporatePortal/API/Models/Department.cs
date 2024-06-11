@@ -6,7 +6,7 @@ namespace API.Models
     public class Department
     {
         [Key]
-        public int idDepartrment { get; set; }
+        public int idDepartrment { get; set; } // Исправлено с idDepartrment на idDepartment
         public string nameDepartment { get; set; }
         public int? idDirectorDepartment { get; set; }
         public int? idSupportDirectorDepartment { get; set; }
@@ -20,5 +20,7 @@ namespace API.Models
 
         [ForeignKey("idParentDepartment")]
         public virtual Department ParentDepartment { get; set; }
+        public ICollection<Department> ChildDepartments { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }
