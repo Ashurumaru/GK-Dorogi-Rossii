@@ -10,6 +10,7 @@ using WPF.Data;
 using CorporatePortal.WPF.Models;
 using CorporatePortal.WPF.Utils;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace CorporatePortal.WPF.Views
 {
@@ -158,6 +159,11 @@ namespace CorporatePortal.WPF.Views
                 btn_maximize.Content = "\uE922";
                 titleBar.Height = 32;
             }
+        }
+
+        private void GitHub_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/Ashurumaru");
         }
     }
 }

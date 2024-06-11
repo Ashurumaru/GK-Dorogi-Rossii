@@ -10,20 +10,10 @@
 namespace WPF.Data
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class UserRoles
+    public partial class sp_helpdiagramdefinition_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserRoles()
-        {
-            this.UserAccount = new HashSet<UserAccount>();
-        }
-    
-        public int idRole { get; set; }
-        public string nameRole { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserAccount> UserAccount { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

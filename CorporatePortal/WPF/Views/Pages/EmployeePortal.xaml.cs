@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CorporatePortal.WPF.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,31 @@ namespace WPF.Views.Pages
     /// </summary>
     public partial class EmployeePortal : Page
     {
+        private readonly ApiClient _apiClient;
+
         public EmployeePortal()
         {
             InitializeComponent();
+            _apiClient = new ApiClient("https://localhost:7201/");
+            LoadEvents();
+            LoadEmployees();
+        }
+
+        private async void LoadEvents()
+        {
+
+                var events = await _apiClient.GetEventsAsync();
+                EventItemsControl.ItemsSource = events;
+
+        }
+        private async void LoadEmployees()
+        {
+            var employees = await _apiClient.GetUsersAsync();
+            EmployeeItems.ItemsSource = employees;
+        }
+        private void EventCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

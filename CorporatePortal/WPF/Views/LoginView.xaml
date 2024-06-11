@@ -5,14 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CorporatePortal.WPF.Views"
         mc:Ignorable="d"
-                Style="{DynamicResource LoginWindowStyle}">
-    <Grid>
-        <Grid x:Name="BackgroundGrid">
-            <!--<Grid.Background>
-                <ImageBrush ImageSource="\Image\zolushka.j" Stretch="UniformToFill"/>
-            </Grid.Background>-->
-        </Grid>
-        <Grid Background="{DynamicResource  GradientBackgroundBrush}" Opacity="0.5"/>
+        Style="{DynamicResource LoginWindowStyle}"
+        MouseDown="DockPanel_MouseDown">
+    <Grid Background="#40444c">
         <Grid>
             <Grid Margin="30" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Border Style="{DynamicResource  LoginBorderStyle}"/>
@@ -27,17 +22,14 @@
                 </StackPanel>
             </Grid>
             <Grid VerticalAlignment="Top">
-                <DockPanel Name="titleBar" VerticalAlignment="Top" Height="32" LastChildFill="False" MouseDown="DockPanel_MouseDown" Background="Transparent">
+                <DockPanel Name="titleBar" VerticalAlignment="Top" Height="32" LastChildFill="False" Background="Transparent">
                     <Button Style="{DynamicResource  CloseButtonStyle}" x:Name="btn_close" Content="&#xE8BB;" Click="btn_close_Click" />
                     <Button Style="{DynamicResource  MaxMinButtonStyle}" x:Name="btn_maximize" Content="&#xE922;" Click="btn_maximize_Click"/>
                     <Button Style="{DynamicResource  MaxMinButtonStyle}" x:Name="btn_minimize" Content="&#xE921;" Click="btn_minimize_Click"/>
                 </DockPanel>
             </Grid>
         </Grid>
-        <TextBlock Text="Github: Ashurumaru" Style="{DynamicResource  StandartText}" Margin="0 0 0 4" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="12" Opacity="0.6">
-            <TextBlock.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding OpenGitHubCommand}" />
-            </TextBlock.InputBindings>
+        <TextBlock Text="Github: Ashurumaru" MouseDown="GitHub_MouseDown" Style="{DynamicResource  StandartText}" Margin="0 0 0 4" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="12" Opacity="0.6">
         </TextBlock>
     </Grid>
 </Window>

@@ -114,6 +114,9 @@
     <Compile Include="Data\News.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\NewTypes.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Projects.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
@@ -129,7 +132,16 @@
     <Compile Include="Data\ProjectTypes.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sp_helpdiagrams_Result.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\sysdiagrams.cs">
+      <DependentUpon>database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserAccount.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\UserPositions.cs">
@@ -141,6 +153,7 @@
     <Compile Include="Data\Users.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventDto.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\LoginDto.cs" />
     <Compile Include="Models\Responsible.cs" />
@@ -149,6 +162,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserPosition.cs" />
     <Compile Include="Utils\ApiClient.cs" />
     <Compile Include="Utils\PasswordGenerate.xaml.cs">
       <DependentUpon>PasswordGenerate.xaml</DependentUpon>

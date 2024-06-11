@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CorporatePortal.WPF.Models;
 using API.Models;
+using WPF.Models;
 
 namespace CorporatePortal.WPF.Utils
 {
@@ -85,22 +86,15 @@ namespace CorporatePortal.WPF.Utils
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<List<Department>> GetDepartmentsAsync()
+        public async Task<List<EventDto>> GetEventsAsync()
         {
-            var response = await _httpClient.GetAsync("api/departments");
-            response.EnsureSuccessStatusCode();
 
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<Department>>(content);
-        }
+                var response = await _httpClient.GetAsync("api/Events");
+                response.EnsureSuccessStatusCode();
 
-        public async Task<Department> GetDepartmentAsync(int id)
-        {
-            var response = await _httpClient.GetAsync($"api/departments/{id}");
-            response.EnsureSuccessStatusCode();
-
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Department>(content);
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<EventDto>>(content);
+            
         }
     }
 }

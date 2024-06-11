@@ -5,12 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="800"
       Title="EmployeePortal">
-
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -18,26 +16,75 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.6*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="Календарь" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
-            <Calendar Style="{DynamicResource CustomCalendar}" x:Name="EventCalendar" />
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <TextBlock Style="{DynamicResource StandartText}" Text="Сотрудники" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="EmployeeItems">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" Background="{StaticResource ColorGreen}" BorderThickness="1" Margin="5" Padding="5" CornerRadius="5">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding firstName}" FontSize="14" FontWeight="Bold" Foreground="Black" Style="{DynamicResource StandartText}" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding secondName}" FontWeight="Bold"  Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                        <TextBlock Text="{Binding patronymic}" FontWeight="Bold"  Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Email}" Foreground="Blue" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding workNumber}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding homeNumber}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding birthDay, StringFormat='День рождения: {0:dd.MM.yyyy}'}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding Department}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding Position}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </StackPanel>
-
+        <StackPanel Grid.Row="1">
+            <TextBlock Style="{DynamicResource StandartText}" Text="Календарь" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <Calendar CalendarButtonStyle="{DynamicResource CalendarButtonStyle}" Style="{DynamicResource CalendarStyle}" Name="EventCalendar" SelectedDatesChanged="EventCalendar_SelectedDatesChanged" Height="180" Width="180">
+                <Calendar.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.2"/>
+                    </TransformGroup>
+                </Calendar.LayoutTransform>
+            </Calendar>
+        </StackPanel>
         <StackPanel Grid.Row="2">
-            <TextBlock Text="События" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
-            <ItemsControl>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Background="Green">
-                            <TextBlock Text="{Binding fio}"/>
-                            <TextBlock Text="{Binding }"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <TextBlock Style="{DynamicResource StandartText}" Text="Мероприятия" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <ScrollViewer MinHeight="200" MaxHeight="200">
+                <ItemsControl x:Name="EventItemsControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" Background="{StaticResource ColorGreen}" BorderThickness="1" Margin="5" Padding="5" CornerRadius="5">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Bold" Foreground="Black" Style="{DynamicResource StandartText}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Type}" FontStyle="Italic" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding StartDate, StringFormat='Дата: {0:dd.MM.yyyy}'}" Foreground="Black" Margin="10,0,0,0" Style="{DynamicResource StandartText}"/>
+                                        <TextBlock Text="{Binding EndDate, StringFormat='- {0:dd.MM.yyyy}'}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Description}" Foreground="Black" TextWrapping="Wrap" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding Initiator}" Style="{DynamicResource StandartText}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <TextBlock Style="{DynamicResource StandartText}" Text="События" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <!-- Add additional UI elements or content here -->
         </StackPanel>
     </Grid>
 </Page>

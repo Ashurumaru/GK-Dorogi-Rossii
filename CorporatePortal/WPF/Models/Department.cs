@@ -12,9 +12,10 @@ namespace CorporatePortal.WPF.Models
     /// </summary>
     public class Department
     {
-        public int ПодразделениеID { get; set; }
-        public string НазваниеПодразделения { get; set; }
-        public int? РуководительПодразделения { get; set; }
-        public int? ПомощникРуководителя { get; set; }
+        public int idDepartment { get; set; }
+        public string nameDepartment { get; set; }
+        public int? idDirectorDepartment { get; set; }
+        public int? idSupportDirectorDepartment { get; set; }
+        public int? idParentDepartment { get; set; }
     }
 }

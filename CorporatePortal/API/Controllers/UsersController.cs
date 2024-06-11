@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using API.Data;
+using API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using API.Data;
-using API.Models;
-using Microsoft.AspNetCore.Identity.Data;
-using System.Text;
-using System.Security.Cryptography;
-using Microsoft.CodeAnalysis.Scripting;
 
 namespace API.Controllers
 {
@@ -29,7 +20,6 @@ namespace API.Controllers
         [HttpPost("Authorize")]
         public async Task<ActionResult<User>> AuthorizeUser(LoginDto loginRequest)
         {
-            // Получаем учетную запись пользователя по имени пользователя
             var userAccount = await _context.UserAccount
                 .FirstOrDefaultAsync(u => u.username == loginRequest.Username);
 
@@ -38,13 +28,11 @@ namespace API.Controllers
                 return Unauthorized("Invalid username or password.");
             }
 
-            // Проверяем пароль
             if (!BCrypt.Net.BCrypt.Verify(loginRequest.Password, userAccount.passwordHash))
             {
                 return Unauthorized("Invalid username or password.");
             }
 
-            // Получаем пользователя по id
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.idUser == userAccount.idUser);
 

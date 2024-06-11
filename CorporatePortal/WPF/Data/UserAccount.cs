@@ -12,18 +12,15 @@ namespace WPF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRoles
+    public partial class UserAccount
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserRoles()
-        {
-            this.UserAccount = new HashSet<UserAccount>();
-        }
+        public int idUserAccount { get; set; }
+        public int idUser { get; set; }
+        public string username { get; set; }
+        public string passwordHash { get; set; }
+        public Nullable<int> idRole { get; set; }
     
-        public int idRole { get; set; }
-        public string nameRole { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserAccount> UserAccount { get; set; }
+        public virtual UserRoles UserRoles { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

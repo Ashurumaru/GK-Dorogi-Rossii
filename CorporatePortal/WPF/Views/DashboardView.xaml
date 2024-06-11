@@ -5,61 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CorporatePortal.WPF.Views"
         mc:Ignorable="d"
-        Title="Главное окно" Height="450" Width="800" MinHeight="400" MinWidth="800">
+        Style="{DynamicResource DashboardWindowStyle}"
+        MouseDown="DockPanel_MouseDown"
+        Title="Главное окно" Height="600" Width="1000" MinHeight="400" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="185"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Background="Gray" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
-        <Border Background="Gray" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+        <Border Background="#403c3c" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+        <Border Background="{StaticResource ColorGreen}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Height="35" VerticalAlignment="Top"/>
+
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Button x:Name="BtnEmployeePortal" Click="BtnEmployeePortal_Click" HorizontalAlignment="Center" Margin="10" >
-                <TextBlock Text="Портал сотрудников" Background="AliceBlue"/>
+            <Button x:Name="BtnEmployeePortal" Click="BtnEmployeePortal_Click" Style="{DynamicResource ButtonMenuStyle}">
+                <TextBlock Text="Портал сотрудников"/>
             </Button>
-            <Button x:Name="BtnControlUser" HorizontalAlignment="Center" Margin="10" >
-                <TextBlock Text="Управление персоналом" Background="AliceBlue"/>
+            <Button x:Name="BtnControlUser" Style="{DynamicResource ButtonMenuStyle}">
+                <TextBlock Text="Управление персоналом"/>
             </Button>
-            <Button x:Name="Btn2" HorizontalAlignment="Center" Margin="10" >
-                <TextBlock Text="Управление персоналом" Background="AliceBlue"/>
+            <Button x:Name="Btn2" Style="{DynamicResource ButtonMenuStyle}" >
+                <TextBlock Text="Управление персоналом"/>
             </Button>
-            <Button x:Name="Btn3" HorizontalAlignment="Center" Margin="10" >
-                <TextBlock Text="Управление персоналом" Background="AliceBlue"/>
+            <Button x:Name="Btn3" Style="{DynamicResource ButtonMenuStyle}" >
+                <TextBlock Text="Управление персоналом"/>
             </Button>
-            <Button x:Name="Btn4" HorizontalAlignment="Center" Margin="10" >
-                <TextBlock Text="Управление персоналом" Background="AliceBlue"/>
+            <Button x:Name="Btn4" Style="{DynamicResource ButtonMenuStyle}" >
+                <TextBlock Text="Управление персоналом"/>
             </Button>
-            <Button x:Name="Btn5" HorizontalAlignment="Center" Margin="10" >
-                <TextBlock Text="Управление персоналом" Background="AliceBlue"/>
+            <Button x:Name="Btn5" Style="{DynamicResource ButtonMenuStyle}" >
+                <TextBlock Text="Управление персоналом"/>
             </Button>
-            <Button x:Name="Btn6" HorizontalAlignment="Center" Margin="10" >
-                <TextBlock Text="Управление персоналом" Background="AliceBlue"/>
-            </Button>
-            <Button x:Name="Btn7" HorizontalAlignment="Center" Margin="10" >
-                <TextBlock Text="Управление персоналом" Background="AliceBlue"/>
+            <Button x:Name="Btn6" Style="{DynamicResource ButtonMenuStyle}" >
+                <TextBlock Text="Управление персоналом"/>
             </Button>
         </StackPanel>
-        <Frame Grid.Row="1" Grid.Column="1" Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" Grid.Column="1" Name="MainFrame" NavigationUIVisibility="Hidden" Background="#34343c"/>
+        <Grid VerticalAlignment="Top" Grid.ColumnSpan="2" Width="135" HorizontalAlignment="Right">
+            <DockPanel Name="titleBar" VerticalAlignment="Top" Height="32" LastChildFill="False" Background="Transparent">
+                <Button Style="{DynamicResource  CloseButtonStyle}" x:Name="btn_close" Content="&#xE8BB;" Click="btn_close_Click" />
+                <Button Style="{DynamicResource  MaxMinButtonStyle}" x:Name="btn_maximize" Content="&#xE922;" Click="btn_maximize_Click"/>
+                <Button Style="{DynamicResource  MaxMinButtonStyle}" x:Name="btn_minimize" Content="&#xE921;" Click="btn_minimize_Click"/>
+            </DockPanel>
+        </Grid>
     </Grid>
-    <!--<StackPanel>
-        <DockPanel VerticalAlignment="Top" Height="30" Background="#40826d">
-            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Right" x:Name="FullNameUser" Text="ФИО" Margin="5"/>
-        </DockPanel>
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Left" Width="170" Margin="5">
-                <Button Content="Управление персоналом" Click="NavigateToUsers" Margin="10"/>
-                <Button Content="Календарь общий" Click="NavigateToIventsCalendar" Margin="10"/>
-                <Button Content="Календарь отсутствия" Click="NavigateToIventsCalendar" Margin="10"/>
-                <Button Content="Календарь обучений" Click="NavigateToIventsCalendar" Margin="10"/>
-                <Button Content="Подбор персонала" Click="NavigateToIventsCalendar" Margin="10"/>
-                <Button Content="Управление проектами" Click="NavigateToIventsCalendar" Margin="10"/>
-                <Button Content="Личный кабинет" Click="NavigateToIventsCalendar" Margin="10"/>
-            </StackPanel>
-            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
-        </DockPanel>
-    </StackPanel>-->
 </Window>

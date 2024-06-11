@@ -18,8 +18,10 @@ namespace WPF.Data
         public string title { get; set; }
         public string description { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
+        public Nullable<int> idTypeNew { get; set; }
         public Nullable<int> idCreator { get; set; }
     
+        public virtual NewTypes NewTypes { get; set; }
         public virtual Users Users { get; set; }
     }
 }
