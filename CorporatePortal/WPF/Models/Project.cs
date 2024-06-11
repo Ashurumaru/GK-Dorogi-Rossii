@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CorporatePortal.WPF.Models
 {
-    public class Project
+    public partial class Project
     {
-        public int ПроектID { get; set; }
-        public string НазваниеПроекта { get; set; }
-        public string ОписаниеПроекта { get; set; }
-        public System.DateTime ДатаНачала { get; set; }
-        public Nullable<System.DateTime> ДатаОкончания { get; set; }
-        public int РуководительПроектаID { get; set; }
-        public string Статус { get; set; }
+        public int IdProject { get; set; }
+
+        public string NameProject { get; set; }
+
+        public string DescriptoinProject { get; set; }
+
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+        public int? IdDepartment { get; set; }
+
+        public int? IdStatusProject { get; set; }
+
+        public int? IdTypeProject { get; set; }
+
+        public virtual Department IdDepartmentNavigation { get; set; }
+
+        public virtual ProjectStatus IdStatusProjectNavigation { get; set; }
+
+        public virtual ProjectType IdTypeProjectNavigation { get; set; }
+
+        public virtual ICollection<ProjectStage> ProjectStages { get; set; } = new List<ProjectStage>();
+
+        public virtual ICollection<User> IdUsers { get; set; } = new List<User>();
     }
 }

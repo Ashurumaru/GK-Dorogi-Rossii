@@ -1,25 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
-namespace API.Models
+namespace API.Models;
+
+public partial class UserAccount
 {
-    public class UserAccount
-    {
-        [Key]
-        public int idUserAccount { get; set; }
-        [ForeignKey("User")]
-        public int? idUser { get; set; }
-        [Required]
-        public string username { get; set; }
-        [Required]
-        public string passwordHash { get; set; }
-        [ForeignKey("UserRole")]
-        public int? idRole { get; set; }
-        [JsonIgnore]
-        public User User { get; set; }
-        [JsonIgnore]
-        public UserRole UserRole { get; set; }
-    }
+    public int IdUserAccount { get; set; }
 
+    public int IdUser { get; set; }
+
+    public string? Username { get; set; }
+
+    public string? PasswordHash { get; set; }
+
+    public int? IdRole { get; set; }
+
+    public virtual UserRole? IdRoleNavigation { get; set; }
+
+    public virtual User IdUserNavigation { get; set; } = null!;
 }

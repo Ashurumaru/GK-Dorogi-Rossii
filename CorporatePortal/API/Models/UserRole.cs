@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace API.Models
+namespace API.Models;
+
+public partial class UserRole
 {
-    public class UserRole
-    {
-        [Key]
-        public int idRole { get; set; }
-        public string nameRole { get; set; }
-    }
+    public int IdRole { get; set; }
+
+    public string? NameRole { get; set; }
+
+    public virtual ICollection<UserAccount> UserAccounts { get; set; } = new List<UserAccount>();
 }

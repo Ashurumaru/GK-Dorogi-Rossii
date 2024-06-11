@@ -5,8 +5,6 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using System.Windows.Controls;
-using WPF.Data;
-using WPF.Models;
 
 namespace WPF.Views.Pages
 {

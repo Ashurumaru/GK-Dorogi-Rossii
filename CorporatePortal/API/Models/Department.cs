@@ -1,26 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace API.Models
+namespace API.Models;
+
+public partial class Department
 {
-    public class Department
-    {
-        [Key]
-        public int idDepartrment { get; set; } // Исправлено с idDepartrment на idDepartment
-        public string nameDepartment { get; set; }
-        public int? idDirectorDepartment { get; set; }
-        public int? idSupportDirectorDepartment { get; set; }
-        public int? idParentDepartment { get; set; }
+    public int IdDepartrment { get; set; }
 
-        [ForeignKey("idDirectorDepartment")]
-        public virtual User Director { get; set; }
+    public string? NameDepartment { get; set; }
 
-        [ForeignKey("idSupportDirectorDepartment")]
-        public virtual User SupportDirector { get; set; }
+    public int? IdDirectorDepartment { get; set; }
 
-        [ForeignKey("idParentDepartment")]
-        public virtual Department ParentDepartment { get; set; }
-        public ICollection<Department> ChildDepartments { get; set; }
-        public ICollection<User> Users { get; set; }
-    }
+    public int? IdSupportDirectorDepartment { get; set; }
+
+    public int? IdParentDepartment { get; set; }
+
+    public virtual Department? IdParentDepartmentNavigation { get; set; }
+
+    public virtual ICollection<Department> InverseIdParentDepartmentNavigation { get; set; } = new List<Department>();
+
+    public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
+
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

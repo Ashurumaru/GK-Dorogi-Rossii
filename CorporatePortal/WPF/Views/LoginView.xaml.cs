@@ -1,16 +1,11 @@
-﻿using CorporatePortal.WPF.Models;
+﻿using CorporatePortal.WPF.Utils;
+using CorporatePortal.WPF.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using WPF.Data;
-using CorporatePortal.WPF.Models;
-using CorporatePortal.WPF.Utils;
 using System.Windows.Input;
-using System.Diagnostics;
 
 namespace CorporatePortal.WPF.Views
 {

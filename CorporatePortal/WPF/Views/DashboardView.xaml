@@ -19,7 +19,9 @@
         </Grid.RowDefinitions>
         <Border Background="#403c3c" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
         <Border Background="{StaticResource ColorGreen}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Height="35" VerticalAlignment="Top"/>
-
+        <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="False" HorizontalAlignment="Center" Margin="10,0">
+            <TextBox x:Name="SearchTextBox" Width="200" Margin="0,5,10,5" VerticalAlignment="Center" TextChanged="SearchTextBox_TextChanged" Style="{DynamicResource SearchTextBoxStyle}" />
+        </DockPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Button x:Name="BtnEmployeePortal" Click="BtnEmployeePortal_Click" Style="{DynamicResource ButtonMenuStyle}">
                 <TextBlock Text="Портал сотрудников"/>

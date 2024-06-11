@@ -23,30 +23,19 @@ namespace API.Controllers
 
         // GET: api/Events
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents()
+        public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
         {
             var events = await _context.Events
-                .Include(e => e.EventType)
-                .Include(e => e.EventStatus)
-                .Include(e => e.Initiator)
-                .Select(e => new EventDto
-                {
-                    Id = e.idEvent,
-                    Name = e.nameEvent,
-                    Type = e.EventType.nameType,
-                    Status = e.EventStatus.nameStatus,
-                    StartDate = e.startDate,
-                    EndDate = e.endDate,
-                    Description = e.descriptionEvent,
-                    Initiator = $"{e.Initiator.firstName} {e.Initiator.secondName}"
-                })
+                .Include(e => e.IdTypeEventNavigation) 
+                .Include(e => e.IdStatusEventNavigation) 
+                .Include(e => e.IdInitiatorNavigation) 
                 .ToListAsync();
 
             return Ok(events);
         }
 
         // GET: api/Events/5
-        [HttpGet("{id}")] // This action retrieves a specific event by ID
+        [HttpGet("{id}")]
         public async Task<ActionResult<Event>> GetEvent(int id)
         {
             var @event = await _context.Events.FindAsync(id);
@@ -78,7 +67,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEvent(int id, Event @event)
         {
-            if (id != @event.idEvent)
+            if (id != @event.IdEvent)
             {
                 return BadRequest();
             }
@@ -112,7 +101,7 @@ namespace API.Controllers
             _context.Events.Add(@event);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = @event.idEvent }, @event);
+            return CreatedAtAction("GetEvent", new { id = @event.IdEvent }, @event);
         }
 
         // DELETE: api/Events/5
@@ -131,9 +120,12 @@ namespace API.Controllers
             return NoContent();
         }
 
+       
+
         private bool EventExists(int id)
         {
-            return _context.Events.Any(e => e.idEvent == id);
+            return _context.Events.Any(e => e.IdEvent == id);
         }
+
     }
 }

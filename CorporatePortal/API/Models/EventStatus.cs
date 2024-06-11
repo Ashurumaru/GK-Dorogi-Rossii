@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace API.Models
+namespace API.Models;
+
+public partial class EventStatus
 {
-    public class EventStatus
-    {
-        [Key]
-        public int idStatusEvent { get; set; }
-        public string nameStatus { get; set; }
-        public virtual ICollection<Event> Events { get; set; }
-    }
+    public int IdStatusEvent { get; set; }
+
+    public string? NameStatus { get; set; }
+
+    public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 }

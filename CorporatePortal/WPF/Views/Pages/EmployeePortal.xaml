@@ -6,21 +6,22 @@
       xmlns:local="clr-namespace:WPF.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="800"
-      Title="EmployeePortal">
-    <Grid>
+      Title="EmployeePortal"
+      SizeChanged="Page_SizeChanged">
+    <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <TextBlock Style="{DynamicResource StandartText}" Text="Сотрудники" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Height="120">
+            <ScrollViewer x:Name="EmployeeScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Height="120">
                 <ItemsControl x:Name="EmployeeItems">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -57,10 +58,11 @@
                     </TransformGroup>
                 </Calendar.LayoutTransform>
             </Calendar>
+            <Button x:Name="ClearSearch" Content="Очистить" Style="{DynamicResource ButtonStyle}" Width="100" Height="30" Click="ClearSearch_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="2">
             <TextBlock Style="{DynamicResource StandartText}" Text="Мероприятия" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
-            <ScrollViewer MinHeight="200" MaxHeight="200">
+            <ScrollViewer x:Name="EventScrollViewer" MinHeight="200" MaxHeight="230">
                 <ItemsControl x:Name="EventItemsControl">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -82,8 +84,29 @@
             </ScrollViewer>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <TextBlock Style="{DynamicResource StandartText}" Text="События" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
-            <!-- Add additional UI elements or content here -->
+            <TextBlock Style="{DynamicResource StandartText}" Text="Новости" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <ScrollViewer  x:Name="NewsScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="470">
+                <ItemsControl x:Name="NewsItemsControl" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="2"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border x:Name="BorderNews" BorderBrush="Gray" Background="{StaticResource ColorGreen}" BorderThickness="1" Margin="5" Padding="10" CornerRadius="5" MinWidth="140" MinHeight="100">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="15" Foreground="Black" Style="{DynamicResource StandartText}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Description}" Foreground="Black" Style="{DynamicResource StandartText}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding CreateDate, StringFormat='Дата создания: {0:dd.MM.yyyy}'}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding NameTypeNew}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding Creator}" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Page>

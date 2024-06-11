@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace API.Models
+namespace CorporatePortal.WPF.Models
 {
     public class UserDto
     {

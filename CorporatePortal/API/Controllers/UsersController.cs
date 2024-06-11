@@ -1,7 +1,12 @@
-﻿using API.Data;
-using API.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API.Data;
+using API.Models;
 
 namespace API.Controllers
 {
@@ -10,31 +15,31 @@ namespace API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly CorporatePortalContext _context;
-        private readonly IConfiguration _configuration;
 
         public UsersController(CorporatePortalContext context)
         {
             _context = context;
         }
+
         // POST: api/Users/Authorize
         [HttpPost("Authorize")]
         public async Task<ActionResult<User>> AuthorizeUser(LoginDto loginRequest)
         {
-            var userAccount = await _context.UserAccount
-                .FirstOrDefaultAsync(u => u.username == loginRequest.Username);
+            var userAccount = await _context.UserAccounts
+                .FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
 
             if (userAccount == null)
             {
                 return Unauthorized("Invalid username or password.");
             }
 
-            if (!BCrypt.Net.BCrypt.Verify(loginRequest.Password, userAccount.passwordHash))
+            if (!BCrypt.Net.BCrypt.Verify(loginRequest.Password, userAccount.PasswordHash))
             {
                 return Unauthorized("Invalid username or password.");
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.idUser == userAccount.idUser);
+                .FirstOrDefaultAsync(u => u.IdUser == userAccount.IdUser);
 
             if (user == null)
             {
@@ -44,39 +49,21 @@ namespace API.Controllers
             return Ok(user);
         }
 
-
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var users = await _context.Users
-                .Include(e => e.Department)
-                .Include(e => e.Position)
-                .Select(e => new UserDto
-                {
-                    IdUser = e.idUser,
-                    FirstName = e.firstName,
-                    SecondName = e.secondName,
-                    Patronymic = e.patronymic,
-                    WorkNumber = e.workNumber,
-                    BirthDay = e.birthDay,
-                    DepartmentName = e.Department.nameDepartment,
-                    IdSwapper = e.idSwapper,
-                    Email = e.Email,
-                    HomeNumber = e.homeNumber,
-                    IdDepartment = e.idDepartment,
-                    IdPosition = e.idPosition,
-                    PhotoPath = e.photoPath,
-                    PositionName = e.Position.namePosition,
-                })
-                .ToListAsync();
+                   .Include(u => u.IdDepartmentNavigation) 
+                   .Include(u => u.IdPositionNavigation) 
+                   .ToListAsync();
 
             return Ok(users);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUserFromId(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
 
@@ -93,7 +80,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.idUser)
+            if (id != user.IdUser)
             {
                 return BadRequest();
             }
@@ -127,7 +114,7 @@ namespace API.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.idUser }, user);
+            return CreatedAtAction("GetUser", new { id = user.IdUser }, user);
         }
 
         // DELETE: api/Users/5
@@ -148,7 +135,7 @@ namespace API.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.idUser == id);
+            return _context.Users.Any(e => e.IdUser == id);
         }
     }
 }

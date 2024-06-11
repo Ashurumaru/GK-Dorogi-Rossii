@@ -1,27 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace API.Models
+namespace API.Models;
+
+public partial class Event
 {
-    public class Event
-    {
-        [Key]
-        public int idEvent { get; set; }
-        public string nameEvent { get; set; }
-        public int? idTypeEvent { get; set; }
-        public int? idStatusEvent { get; set; }
-        public DateTime? startDate { get; set; }
-        public DateTime? endDate { get; set; }
-        public string descriptionEvent { get; set; }
-        public int? idInitiator { get; set; }
+    public int IdEvent { get; set; }
 
-        [ForeignKey("idTypeEvent")]
-        public virtual EventType EventType { get; set; }
+    public string? NameEvent { get; set; }
 
-        [ForeignKey("idStatusEvent")]
-        public virtual EventStatus EventStatus { get; set; }
+    public int? IdTypeEvent { get; set; }
 
-        [ForeignKey("idInitiator")]
-        public virtual User Initiator { get; set; }
-    }
+    public int? IdStatusEvent { get; set; }
+
+    public DateOnly? StartDate { get; set; }
+
+    public DateOnly? EndDate { get; set; }
+
+    public string? DescriptionEvent { get; set; }
+
+    public int? IdInitiator { get; set; }
+
+    public virtual User? IdInitiatorNavigation { get; set; }
+
+    public virtual EventStatus? IdStatusEventNavigation { get; set; }
+
+    public virtual EventType? IdTypeEventNavigation { get; set; }
+
+    public virtual ICollection<User> IdUsers { get; set; } = new List<User>();
 }

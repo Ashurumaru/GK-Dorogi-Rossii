@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace API.Models
+namespace CorporatePortal.WPF.Models
 {
     public class EventDto
     {
@@ -12,5 +12,6 @@ namespace API.Models
         public DateTime? EndDate { get; set; }
         public string Description { get; set; }
         public string Initiator { get; set; }
+
     }
 }

@@ -84,86 +84,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\database.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>database.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\database.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\database.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>database.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Departments.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Events.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\EventStatuses.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\EventTypes.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\News.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\NewTypes.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Projects.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ProjectStages.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ProjectStateStatuses.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ProjectStatuses.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ProjectTypes.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\sp_helpdiagrams_Result.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\sysdiagrams.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\UserAccount.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\UserPositions.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\UserRoles.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Users.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EventDto.cs" />
+    <Compile Include="Models\EventStatus.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\LoginDto.cs" />
-    <Compile Include="Models\Responsible.cs" />
-    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\NewDto.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\NewType.cs" />
+    <Compile Include="Models\ProjectStage.cs" />
+    <Compile Include="Models\ProjectStateStatus.cs" />
+    <Compile Include="Models\ProjectStatus.cs" />
+    <Compile Include="Models\ProjectType.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserDto.cs" />
     <Compile Include="Models\UserPosition.cs" />
+    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Utils\ApiClient.cs" />
     <Compile Include="Utils\PasswordGenerate.xaml.cs">
       <DependentUpon>PasswordGenerate.xaml</DependentUpon>
@@ -183,16 +122,8 @@
     <Compile Include="Views\Pages\IventCalendar.xaml.cs">
       <DependentUpon>IventCalendar.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resourses\Styles.xaml">
@@ -242,13 +173,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Data\database.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>database.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\database.edmx.diagram">
-      <DependentUpon>database.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -266,18 +190,6 @@
     <Folder Include="Views\Create\" />
     <Folder Include="Views\Edit\" />
     <Folder Include="Views\Update\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\database.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>database.edmx</DependentUpon>
-      <LastGenOutput>database.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\database.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>database.edmx</DependentUpon>
-      <LastGenOutput>database.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

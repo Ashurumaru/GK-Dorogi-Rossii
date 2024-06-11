@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using CorporatePortal.WPF.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using CorporatePortal.WPF.Models;
-using API.Models;
-using WPF.Models;
 
 namespace CorporatePortal.WPF.Utils
 {
@@ -76,22 +74,31 @@ namespace CorporatePortal.WPF.Utils
             var response = await _httpClient.DeleteAsync($"api/users/{id}");
             response.EnsureSuccessStatusCode();
         }
-        public async Task<List<UserDto>> GetUsersAsync()
+        public async Task<List<User>> GetUsersAsync()
         {
             var response = await _httpClient.GetAsync("api/users");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<UserDto>>(content);
+            return JsonConvert.DeserializeObject<List<User>>(content);
         }
-        public async Task<List<EventDto>> GetEventsAsync()
+        public async Task<List<Event>> GetEventsAsync()
         {
             var response = await _httpClient.GetAsync("api/Events");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<EventDto>>(content);
+            return JsonConvert.DeserializeObject<List<Event>>(content);
 
+        }
+
+        public async Task<IEnumerable<News>> GetNewsAsync()
+        {
+            var response = await _httpClient.GetAsync("api/News");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<News>>(content);
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WPF.Models
+namespace CorporatePortal.WPF.Models
 {
-    public class UserPosition
+    public partial class UserPosition
     {
-        public int idPosition { get; set; }
-        public string namePosition { get; set; }
+        public int IdPosition { get; set; }
+
+        public string NamePosition { get; set; }
+
+        public virtual ICollection<User> Users { get; set; } = new List<User>();
     }
 }

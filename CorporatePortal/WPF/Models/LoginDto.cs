@@ -1,4 +1,4 @@
-﻿namespace API.Models
+﻿namespace CorporatePortal.WPF.Models
 {
     public class LoginDto
     {

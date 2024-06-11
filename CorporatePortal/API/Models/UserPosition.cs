@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace API.Models
+namespace API.Models;
+
+public partial class UserPosition
 {
-    public class UserPosition
-    {
-        [Key]
-        public int idPosition { get; set; }
-        public string namePosition { get; set; }
+    public int IdPosition { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
-    }
+    public string? NamePosition { get; set; }
+
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

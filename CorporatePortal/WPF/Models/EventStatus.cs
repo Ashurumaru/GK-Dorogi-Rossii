@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 namespace CorporatePortal.WPF.Models
 {
-    public partial class EventType
-    {
-        public int IdTypeEvent { get; set; }
 
-        public string NameType { get; set; }
+    public partial class EventStatus
+    {
+        public int IdStatusEvent { get; set; }
+
+        public string NameStatus { get; set; }
 
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
     }
