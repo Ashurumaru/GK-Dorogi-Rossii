@@ -98,6 +98,11 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Event>> PostEvent(Event @event)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _context.Events.Add(@event);
             await _context.SaveChangesAsync();
 

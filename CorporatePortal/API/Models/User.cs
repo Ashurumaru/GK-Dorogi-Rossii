@@ -23,7 +23,7 @@ public partial class User
 
     public string? HomeNumber { get; set; }
 
-    public DateOnly? BirthDay { get; set; }
+    public DateTime? BirthDay { get; set; }
 
     public string? PhotoPath { get; set; }
 

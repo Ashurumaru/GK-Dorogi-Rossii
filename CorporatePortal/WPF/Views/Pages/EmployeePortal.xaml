@@ -20,7 +20,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-            <TextBlock Style="{DynamicResource StandartText}" Text="Сотрудники" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <DockPanel>
+                <TextBlock Style="{DynamicResource StandartText}" Text="Сотрудники" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+                <Button x:Name="AddEmployeeButton" Click="AddEventButton_Click" Style="{DynamicResource AddButtonStyle}" Margin="10 0 0 0" Width="30" Height="30" HorizontalAlignment="Right"/>
+            </DockPanel>            
             <ScrollViewer x:Name="EmployeeScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Height="120">
                 <ItemsControl x:Name="EmployeeItems">
                     <ItemsControl.ItemsPanel>
@@ -41,7 +44,7 @@
                                     <TextBlock Text="{Binding BirthDay, StringFormat='День рождения: {0:dd.MM.yyyy}'}" Margin="0 0 0 0" Foreground="Black" FontSize="10" Style="{DynamicResource StandartText}"/>
                                     <TextBlock Text="{Binding DepartmentName}" Foreground="Black" Style="{DynamicResource StandartText}" Margin="0 0 0 0" FontSize="10"/>
                                     <TextBlock Text="{Binding PositionName}" Foreground="Black" Style="{DynamicResource StandartText}" Margin="0 0 0 0" FontSize="10" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="{Binding Email}" Foreground="Blue" Style="{DynamicResource StandartText}" Margin="0 0 0 0" FontSize="10" HorizontalAlignment="Right"/>
+                                    <TextBlock Text="{Binding Email}" Foreground="Blue" Style="{DynamicResource StandartText}" Margin="0 0 0 0" FontSize="10" HorizontalAlignment="Left"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -61,7 +64,10 @@
             <Button x:Name="ClearSearch" Content="Очистить" Style="{DynamicResource ButtonStyle}" Width="100" Height="30" Click="ClearSearch_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <TextBlock Style="{DynamicResource StandartText}" Text="Мероприятия" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <DockPanel>
+                <TextBlock Style="{DynamicResource StandartText}" Text="Мероприятия" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+                <Button x:Name="AddEventButton" Click="AddEventButton_Click" Style="{DynamicResource AddButtonStyle}" Margin="10 0 0 0" Width="30" Height="30" HorizontalAlignment="Right"/>
+            </DockPanel>
             <ScrollViewer x:Name="EventScrollViewer" MinHeight="200" MaxHeight="230">
                 <ItemsControl x:Name="EventItemsControl">
                     <ItemsControl.ItemTemplate>
@@ -84,7 +90,10 @@
             </ScrollViewer>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <TextBlock Style="{DynamicResource StandartText}" Text="Новости" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <DockPanel>
+                <TextBlock Style="{DynamicResource StandartText}" Text="Новости" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+                <Button x:Name="AddNewsButton" Click="AddNewsButton_Click" Style="{DynamicResource AddButtonStyle}" Margin="10 0 0 0" Width="30" Height="30" HorizontalAlignment="Right"/>
+            </DockPanel>
             <ScrollViewer  x:Name="NewsScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="470">
                 <ItemsControl x:Name="NewsItemsControl" >
                     <ItemsControl.ItemsPanel>

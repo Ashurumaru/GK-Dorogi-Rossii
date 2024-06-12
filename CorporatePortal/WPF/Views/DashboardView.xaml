@@ -26,7 +26,7 @@
             <Button x:Name="BtnEmployeePortal" Click="BtnEmployeePortal_Click" Style="{DynamicResource ButtonMenuStyle}">
                 <TextBlock Text="Портал сотрудников"/>
             </Button>
-            <Button x:Name="BtnControlUser" Style="{DynamicResource ButtonMenuStyle}">
+            <Button x:Name="BtnControlUser" Click="BtnControlUser_Click" Style="{DynamicResource ButtonMenuStyle}" >
                 <TextBlock Text="Управление персоналом"/>
             </Button>
             <Button x:Name="Btn2" Style="{DynamicResource ButtonMenuStyle}" >

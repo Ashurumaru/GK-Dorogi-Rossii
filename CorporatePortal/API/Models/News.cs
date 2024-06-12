@@ -11,7 +11,7 @@ public partial class News
 
     public string? Description { get; set; }
 
-    public DateOnly? CreateDate { get; set; }
+    public DateTime? CreateDate { get; set; } 
 
     public int? IdTypeNew { get; set; }
 

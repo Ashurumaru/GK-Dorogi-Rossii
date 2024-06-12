@@ -1,4 +1,6 @@
 ﻿using CorporatePortal.WPF.Models;
+using CorporatePortal.WPF.Utils;
+using CorporatePortal.WPF.Views.Pages;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,6 +14,7 @@ namespace CorporatePortal.WPF.Views
     public partial class DashboardView : Window
     {
         private User _currentUser;
+        private readonly ApiClient _apiClient;
 
         /// <summary>
         /// 
@@ -21,7 +24,8 @@ namespace CorporatePortal.WPF.Views
         {
             InitializeComponent();
             _currentUser = currentUser;
-            MessageBox.Show(_currentUser.ToString());
+            _apiClient = new ApiClient("https://localhost:7201/");
+            MessageBox.Show($"Добро пожаловать {_currentUser.FirstName} {_currentUser.SecondName}");
         }
         /// <summary>
         /// 
@@ -34,10 +38,13 @@ namespace CorporatePortal.WPF.Views
 
         private void BtnEmployeePortal_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new EmployeePortal());
+            MainFrame.Navigate(new EmployeePortal(_apiClient, _currentUser));
         }
 
-
+        private void BtnControlUser_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ControlEmployees(_apiClient));
+        }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

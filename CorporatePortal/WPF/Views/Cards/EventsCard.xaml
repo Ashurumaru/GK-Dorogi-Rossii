@@ -1,0 +1,23 @@
+﻿<Window x:Class="WPF.Views.Cards.EventsCard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.Views.Cards"
+        mc:Ignorable="d"
+        Title="Добавить мероприятие" Height="400" Width="400">
+    <Grid Background="{StaticResource BackgroundBorderColor}">
+        <StackPanel Margin="10">
+            <TextBox x:Name="NameTextBox" Margin="0,5" Width="350" Tag="Название" Style="{StaticResource CustomTextBoxStyle}"/>
+            <ComboBox x:Name="TypeComboBox" Margin="0,5" Width="350" DisplayMemberPath="NameType" SelectedValuePath="IdTypeEvent" Style="{StaticResource CustomComboBoxStyle}"/>
+            <ComboBox x:Name="StatusComboBox" Margin="0,5" Width="350" DisplayMemberPath="NameStatus" SelectedValuePath="IdStatusEvent" Style="{StaticResource CustomComboBoxStyle}"/>
+            <DatePicker x:Name="StartDatePicker" Margin="0,5" Width="350" Tag="Дата начала"/>
+            <DatePicker x:Name="EndDatePicker" Margin="0,5" Width="350" Tag="Дата окончания" />
+            <TextBox x:Name="DescriptionTextBox" Margin="0,5" Width="350" Tag="Описание" Style="{StaticResource CustomTextBoxStyle}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="8">
+                <Button Content="Отмена"  Style="{DynamicResource ButtonStyle}" Height="30"  HorizontalAlignment="Center" Margin="10,00,10,0" Width="80" Click="CancelButton_Click"/>
+                <Button Content="Сохранить" Style="{DynamicResource ButtonStyle}" Height="30"  HorizontalAlignment="Center" Margin="0,10" Width="80" Click="SaveButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

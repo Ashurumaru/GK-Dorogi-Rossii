@@ -46,7 +46,12 @@ namespace API.Controllers
 
             return news;
         }
-
+        // GET: api/News/NewsTypes
+        [HttpGet("NewsTypes")] 
+        public async Task<ActionResult<IEnumerable<NewType>>> GetNewsTypes()
+        {
+            return await _context.NewTypes.ToListAsync();
+        }
         // PUT: api/News/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -83,10 +88,15 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<News>> PostNews(News news)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.News.Add(news);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetNews", new { id = news.IdNew }, news);
+            return CreatedAtAction(nameof(GetNews), new { id = news.IdNew }, news);
         }
 
         // DELETE: api/News/5

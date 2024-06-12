@@ -17,27 +17,41 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
-        <TreeView x:Name="CompanyStructureTreeView" Grid.Column="0" Margin="10"  SelectedItemChanged="CompanyStructureTreeView_SelectedItemChanged"/>
-
-        <ItemsControl x:Name="EmployeeList" Grid.Row="1" Grid.Column="1">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding ФИО}" Margin="2" />
-                        <TextBlock Text="{Binding Подразделение}" Margin="2" />
-
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <!--<DataGrid x:Name="EmployeeDataGrid" Grid.Column="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Имя" Binding="{Binding Имя}" Width="*"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия}" Width="*"/>
-                <DataGridTextColumn Header="Отчество" Binding="{Binding Отчество}" Width="*"/>
-                <DataGridTextColumn Header="Должность" Binding="{Binding Должность}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
+            <DockPanel>
+                <TextBlock Style="{DynamicResource StandartText}" Text="Список подразделений" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            </DockPanel>
+        <TreeView Style="{DynamicResource CustomTreeViewStyle}"  Background="Transparent" x:Name="DepartmentTreeView" Grid.Row="1" Grid.Column="0" SelectedItemChanged="DepartmentTreeView_SelectedItemChanged">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding InverseIdParentDepartmentNavigation}">
+                    <TextBlock Text="{Binding NameDepartment}" FontSize="13" Foreground="{StaticResource ColorText}"/>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <DockPanel Grid.Column="1">
+            <TextBlock Style="{DynamicResource StandartText}" Text="Список сотрудников подразделения" Margin="10 0 0 0" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold"/>
+            <Button x:Name="AddUserButton" Click="AddUserButton_Click" Style="{DynamicResource AddButtonStyle}" Margin="10 0 0 0" Width="30" Height="30" HorizontalAlignment="Right"/>
+        </DockPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+        
+            <ItemsControl x:Name="EmployeeItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Gray" Background="{StaticResource ColorGreen}" BorderThickness="1" Margin="5" Padding="5"  CornerRadius="5">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding SecondName}" FontWeight="Bold" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                    <TextBlock Text="{Binding Patronymic}" FontWeight="Bold" Foreground="Black" Style="{DynamicResource StandartText}"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Email}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding DepartmentName}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding PositionName}" FontWeight="Bold"/>
+                                <Button Content="Подробнее" Tag="{Binding}" Click="OpenUserCard_Click" Style="{StaticResource ButtonStyle}" Background="Gray" Height="30" Width="100" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
 </Page>

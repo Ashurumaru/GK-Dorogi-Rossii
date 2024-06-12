@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Data;
 using API.Models;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 
 namespace API.Controllers
 {
@@ -65,16 +66,26 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .Include(u => u.IdDepartmentNavigation)
+                .Include(u => u.IdPositionNavigation)
+                .Include(u => u.UserAccounts)
+                .ThenInclude(ua => ua.IdRoleNavigation)
+                .SingleOrDefaultAsync(u => u.IdUser == id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return Ok(user);
         }
-
+        // GET: api/Users/Positions
+        [HttpGet("Positions")]
+        public async Task<ActionResult<IEnumerable<UserPosition>>> GetEventsStatuses()
+        {
+            return await _context.UserPositions.Include(u => u.Users).ToListAsync();
+        }
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

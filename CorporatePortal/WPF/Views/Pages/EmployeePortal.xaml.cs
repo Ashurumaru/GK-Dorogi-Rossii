@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using WPF.Views.Cards;
 
 namespace WPF.Views.Pages
 {
@@ -14,16 +16,18 @@ namespace WPF.Views.Pages
     public partial class EmployeePortal : Page
     {
         private readonly ApiClient _apiClient;
+        private User _currentUser;
         private ObservableCollection<NewDto> _newDto;
         private ObservableCollection<EventDto> _eventDto;
         private ObservableCollection<UserDto> _userDto;
         /// <summary>
         /// 
         /// </summary>
-        public EmployeePortal()
+        public EmployeePortal(ApiClient apiClient, User currentUser)
         {
             InitializeComponent();
-            _apiClient = new ApiClient("https://localhost:7201/");
+            _apiClient = apiClient;
+            _currentUser = currentUser;
             LoadData();
         }
 
@@ -126,6 +130,23 @@ namespace WPF.Views.Pages
         }
 
 
+        private void AddEventButton_Click(object sender, RoutedEventArgs e)
+        {
+            var addEventWindow = new EventsCard(_apiClient);
+            if (addEventWindow.ShowDialog() == true)
+            {
+                LoadEvents();
+            }
+        }
+
+        private void AddNewsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var addNewsWindow = new NewsCard(_apiClient, _currentUser);
+            if (addNewsWindow.ShowDialog() == true)
+            {
+                LoadNews();
+            }
+        }
 
         private void EventCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
