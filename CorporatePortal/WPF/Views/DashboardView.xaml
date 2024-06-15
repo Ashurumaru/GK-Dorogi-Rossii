@@ -29,21 +29,6 @@
             <Button x:Name="BtnControlUser" Click="BtnControlUser_Click" Style="{DynamicResource ButtonMenuStyle}" >
                 <TextBlock Text="Управление персоналом"/>
             </Button>
-            <Button x:Name="Btn2" Style="{DynamicResource ButtonMenuStyle}" >
-                <TextBlock Text="Управление персоналом"/>
-            </Button>
-            <Button x:Name="Btn3" Style="{DynamicResource ButtonMenuStyle}" >
-                <TextBlock Text="Управление персоналом"/>
-            </Button>
-            <Button x:Name="Btn4" Style="{DynamicResource ButtonMenuStyle}" >
-                <TextBlock Text="Управление персоналом"/>
-            </Button>
-            <Button x:Name="Btn5" Style="{DynamicResource ButtonMenuStyle}" >
-                <TextBlock Text="Управление персоналом"/>
-            </Button>
-            <Button x:Name="Btn6" Style="{DynamicResource ButtonMenuStyle}" >
-                <TextBlock Text="Управление персоналом"/>
-            </Button>
         </StackPanel>
         <Frame Grid.Row="1" Grid.Column="1" Name="MainFrame" NavigationUIVisibility="Hidden" Background="#34343c"/>
         <Grid VerticalAlignment="Top" Grid.ColumnSpan="2" Width="135" HorizontalAlignment="Right">
