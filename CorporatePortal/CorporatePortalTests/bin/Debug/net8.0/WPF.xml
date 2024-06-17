@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WPF</name>
+    </assembly>
+    <members>
+        <member name="T:WPF.Utils.PasswordGenerate">
+            <summary>
+            Логика взаимодействия для PasswordGenerate.xaml
+            </summary>
+            <summary>
+            PasswordGenerate
+            </summary>
+        </member>
+        <member name="M:WPF.Utils.PasswordGenerate.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:WPF.Views.Cards.EventsCard">
+            <summary>
+            Логика взаимодействия для EventsCard.xaml
+            </summary>
+            <summary>
+            EventsCard
+            </summary>
+        </member>
+        <member name="M:WPF.Views.Cards.EventsCard.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:WPF.Views.Cards.NewsCard">
+            <summary>
+            Логика взаимодействия для NewsCard.xaml
+            </summary>
+            <summary>
+            NewsCard
+            </summary>
+        </member>
+        <member name="M:WPF.Views.Cards.NewsCard.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:WPF.Views.Cards.UsersCard">
+            <summary>
+            Логика взаимодействия для UsersCard.xaml
+            </summary>
+            <summary>
+            UsersCard
+            </summary>
+        </member>
+        <member name="M:WPF.Views.Cards.UsersCard.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:WPF.Views.Pages.EmployeePortal">
+            <summary>
+            Логика взаимодействия для EmployeePortal.xaml
+            </summary>
+            <summary>
+            EmployeePortal
+            </summary>
+        </member>
+        <member name="M:WPF.Views.Pages.EmployeePortal.#ctor(CorporatePortal.WPF.Utils.ApiClient,CorporatePortal.WPF.Models.User)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WPF.Views.Pages.EmployeePortal.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:WPF.Views.Pages.IventCalendar">
+            <summary>
+            IventCalendar
+            </summary>
+        </member>
+        <member name="M:WPF.Views.Pages.IventCalendar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:WPF.App">
+            <summary>
+            Логика взаимодействия для App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:WPF.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:WPF.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:WPF.Properties.Resources">
+            <summary>
+              Класс ресурсов со строгим типом для поиска локализованных строк и пр.
+            </summary>
+        </member>
+        <member name="P:WPF.Properties.Resources.ResourceManager">
+            <summary>
+              Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
+            </summary>
+        </member>
+        <member name="P:WPF.Properties.Resources.Culture">
+            <summary>
+              Переопределяет свойство CurrentUICulture текущего потока для всех
+              подстановки ресурсов с помощью этого класса ресурсов со строгим типом.
+            </summary>
+        </member>
+        <member name="T:CorporatePortal.WPF.Views.Pages.ControlEmployees">
+            <summary>
+            Логика взаимодействия для ControlEmployees.xaml
+            </summary>
+            <summary>
+            ControlEmployees
+            </summary>
+        </member>
+        <member name="M:CorporatePortal.WPF.Views.Pages.ControlEmployees.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CorporatePortal.WPF.Views.DashboardView">
+            <summary>
+            
+            </summary>
+            <summary>
+            DashboardView
+            </summary>
+        </member>
+        <member name="M:CorporatePortal.WPF.Views.DashboardView.#ctor(CorporatePortal.WPF.Models.User)">
+            <summary>
+            
+            </summary>
+            <param name="currentUser"></param>
+        </member>
+        <member name="M:CorporatePortal.WPF.Views.DashboardView.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CorporatePortal.WPF.Views.DashboardView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CorporatePortal.WPF.Views.LoginView">
+            <summary>
+            Логика взаимодействия для LoginView.xaml
+            </summary>
+            <summary>
+            LoginView
+            </summary>
+        </member>
+        <member name="M:CorporatePortal.WPF.Views.LoginView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>
